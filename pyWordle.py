@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import sys
 import argparse
 import re
 
@@ -80,6 +79,28 @@ def narrowWordSet(wordSet, pattern):
 
     return newWordSet
 
+
+def validateWord(testWord):
+    goodWord = True
+
+    if len(testWord) != 5:
+        print("Wordle words must only be five characters long.")
+        goodWord = False
+
+    return goodWord
+
+
+def validatePattern(pattern):
+    goodPattern = True
+
+    match = re.match("^[xyg]{5}$", pattern)
+    if match == None:
+        print("The wordle result must be five characters and const of g, x, or y.")
+        goodPattern = False
+
+    return goodPattern
+
+
 def main():
     parser = argparse.ArgumentParser(
         description='Helper program for wordle game.')
@@ -90,11 +111,19 @@ def main():
     wordSet = buildWordSet()
 
     while len(checkPattern) > 5 and len(wordSet) > 1:
+        initialWordSetSize = len(wordSet)
         testWord = ""
         result = ""
+        goodWord = False
+        goodPattern = False
 
-        testWord = input("Word entered in wordle: ")
-        result = input("Enter result from wordle x - no match, y - match wrong position, g - correct letter in correct position: ")
+        while not goodWord:
+            testWord = input("Word entered in wordle: ")
+            goodWord = validateWord(testWord)
+
+        while not goodPattern:
+            result = input("Enter result from wordle x - no match, y - match wrong position, g - correct letter in correct position: ")
+            goodPattern = validatePattern(result)
 
         printPattern(patternList)
 
@@ -104,6 +133,9 @@ def main():
         printPattern(patternList)
 
         wordSet = narrowWordSet(wordSet, checkPattern)
+        updatedWordSetSize = len(wordSet)
+
+        print(f'Your choice has narrowed the possibilities from {initialWordSetSize} to {updatedWordSetSize}')
         print(wordSet)
 
 

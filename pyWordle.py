@@ -4,6 +4,7 @@ import sys
 import argparse
 import re
 
+mustHaveCharacters = set()
 
 def buildPattern(patternList):
     patternString = ""
@@ -28,9 +29,11 @@ def updatePattern(index, patternList, wordCharacter, resultCharacter, resultPatt
     if resultCharacter == 'y':
         value = removeCharacterFromPattern(patternList[index], wordCharacter, resultPattern[index])
         patternList[index] = value
+        mustHaveCharacters.update({wordCharacter})
 
     if resultCharacter == 'g':
         patternList[index] = wordCharacter
+        mustHaveCharacters.update({wordCharacter})
 
     return patternList
 
@@ -56,12 +59,23 @@ def buildWordSet():
     return wordSet
 
 
+def hasRequiredCharacters(word):
+    if len(mustHaveCharacters) == 0:
+        return True
+
+    for letter in mustHaveCharacters:
+        if word.find(letter) == -1:
+            return False
+
+    return True
+
+
 def narrowWordSet(wordSet, pattern):
     newWordSet = set()
     for word in wordSet:
         match = re.match(pattern, word)
 
-        if match:
+        if match and hasRequiredCharacters(word):
             newWordSet.update({word})
 
     return newWordSet

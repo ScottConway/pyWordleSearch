@@ -47,8 +47,8 @@ def printPattern(patternList):
     for pattern in patternList:
         print(pattern)
 
-def buildWordSet():
-    file = open('fiveLetterWords.txt', "r")
+def buildWordSet(fileName):
+    file = open(fileName, "r")
     wordSet = set()
 
     for line in file:
@@ -108,10 +108,12 @@ def main():
 
     patternList = ["[abcdefghijklmnopqrstuvwxyz]","[abcdefghijklmnopqrstuvwxyz]","[abcdefghijklmnopqrstuvwxyz]","[abcdefghijklmnopqrstuvwxyz]","[abcdefghijklmnopqrstuvwxyz]"]
     checkPattern = buildPattern(patternList)
-    wordSet = buildWordSet()
+    wordSet = buildWordSet('fiveLetterWords.txt')
+    commonWordSet = buildWordSet('commonFiveLetterWords.txt')
 
-    while len(checkPattern) > 5 and len(wordSet) > 1:
+    while len(checkPattern) > 5 and (len(wordSet) > 1 or len(commonWordSet) > 1):
         initialWordSetSize = len(wordSet)
+        initialCommonSetSize = len(commonWordSet)
         testWord = ""
         result = ""
         goodWord = False
@@ -133,10 +135,14 @@ def main():
         printPattern(patternList)
 
         wordSet = narrowWordSet(wordSet, checkPattern)
+        commonWordSet = narrowWordSet(commonWordSet, checkPattern)
         updatedWordSetSize = len(wordSet)
+        updatedCommonSetSize = len(commonWordSet)
 
-        print(f'Your choice has narrowed the possibilities from {initialWordSetSize} to {updatedWordSetSize}')
+        print(f'Your choice has narrowed the full possibilities from {initialWordSetSize} to {updatedWordSetSize}')
         print(wordSet)
+        print(f'Your choice has narrowed the common possibilities from {initialCommonSetSize} to {updatedCommonSetSize}')
+        print(commonWordSet)
 
 
 if __name__ == '__main__':

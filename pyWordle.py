@@ -4,6 +4,12 @@ import argparse
 import re
 
 mustHaveCharacters = list()
+letterWeight = {"e": 1116, "a": 849, "r": 758, "i": 754, "o": 716,
+                "t": 695, "n": 665, "s": 574, "l": 549, "c": 454,
+                "u": 363, "d": 338, "p": 317, "m": 301, "h": 300,
+                "g": 247, "b": 207, "f": 181, "y": 178, "w": 129,
+                "k": 110, "v": 101, "x": 29, "z": 27, "j": 20, "q": 19}
+wordWeightDictionary = {}
 
 
 def buildPattern(patternList):
@@ -51,6 +57,22 @@ def printPattern(patternList):
         print(pattern)
 
 
+def determineWeight(word):
+    wordSum = 0
+    firstLetter = word[0]
+    lastLetter = word[4]
+    for letter in word:
+        wordSum += letterWeight[letter]
+
+    if "taodw".find(firstLetter) != -1:
+        wordSum += 1000
+
+    if "esdt".find(lastLetter) != -1:
+        wordSum += 1000
+
+    return wordSum
+
+
 def buildWordList(fileName):
     file = open(fileName, "r")
     wordList = list()
@@ -58,6 +80,7 @@ def buildWordList(fileName):
     for line in file:
         word = line.strip('\n')
         wordList.append(word)
+        wordWeightDictionary.update({word: determineWeight(word)})
 
     return wordList
 
@@ -73,15 +96,15 @@ def hasRequiredCharacters(word):
     return True
 
 
-def narrowwordList(wordList, pattern):
-    newwordList = list()
+def narrowWordList(wordList, pattern):
+    newWordList = list()
     for word in wordList:
         match = re.match(pattern, word)
 
         if match and hasRequiredCharacters(word):
-            newwordList.append(word)
+            newWordList.append(word)
 
-    return newwordList
+    return newWordList
 
 
 def validateWord(testWord):
@@ -98,11 +121,15 @@ def validatePattern(pattern):
     goodPattern = True
 
     match = re.match("^[xyg]{5}$", pattern)
-    if match == None:
+    if match is None:
         print("The wordle result must be five characters and const of g, x, or y.")
         goodPattern = False
 
     return goodPattern
+
+
+def getWordWeight(word):
+    return wordWeightDictionary[word]
 
 
 def main():
@@ -114,11 +141,11 @@ def main():
                    "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]"]
     checkPattern = buildPattern(patternList)
     wordList = buildWordList('fiveLetterWords.txt')
-    commonwordList = buildWordList('commonFiveLetterWords.txt')
+    commonWordList = buildWordList('commonFiveLetterWords.txt')
 
-    while len(checkPattern) > 5 and (len(wordList) > 1 or len(commonwordList) > 1):
-        initialwordListSize = len(wordList)
-        initialCommonSetSize = len(commonwordList)
+    while len(checkPattern) > 5 and (len(wordList) > 1 or len(commonWordList) > 1):
+        initialWordListSize = len(wordList)
+        initialCommonSetSize = len(commonWordList)
         testWord = ""
         result = ""
         goodWord = False
@@ -141,16 +168,19 @@ def main():
 
         printPattern(patternList)
 
-        wordList = narrowwordList(wordList, checkPattern)
-        commonwordList = narrowwordList(commonwordList, checkPattern)
+        wordList = narrowWordList(wordList, checkPattern)
+        commonWordList = narrowWordList(commonWordList, checkPattern)
         updatedwordListSize = len(wordList)
-        updatedCommonSetSize = len(commonwordList)
+        updatedCommonSetSize = len(commonWordList)
 
-        print(f'Your choice has narrowed the full possibilities from {initialwordListSize} to {updatedwordListSize}')
+        print(f'Your choice has narrowed the full possibilities from {initialWordListSize} to {updatedwordListSize}')
+        wordList.sort(key=getWordWeight, reverse=True)
         print(wordList)
+
         print(
             f'Your choice has narrowed the common possibilities from {initialCommonSetSize} to {updatedCommonSetSize}')
-        print(commonwordList)
+        commonWordList.sort(key=getWordWeight, reverse=True)
+        print(commonWordList)
 
 
 if __name__ == '__main__':

@@ -1,4 +1,3 @@
-<a hr
 aargh
 aback
 abaft
@@ -234,7 +233,6 @@ index
 infra
 inner
 input
-intl.
 issue
 japan
 jesus
@@ -254,7 +252,6 @@ learn
 leave
 legal
 lento
-let&#
 level
 lewis
 light
@@ -299,7 +296,6 @@ occur
 oddly
 offer
 often
-one&#
 order
 other
 ought
@@ -403,7 +399,6 @@ smile
 smith
 smoke
 sniff
-so-so
 solid
 solve
 sooey

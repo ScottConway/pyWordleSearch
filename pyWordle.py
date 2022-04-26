@@ -82,8 +82,11 @@ def buildWordList(fileName):
 
     for line in file:
         word = line.strip('\n')
-        wordList.append(word)
-        wordWeightDictionary.update({word: determineWeight(word)})
+        if re.match("[a-z]{5}", word):
+            wordList.append(word)
+            wordWeightDictionary.update({word: determineWeight(word)})
+        else:
+            print(f'{word} is invalid as all words must be five alphabetic letter.  Ignored from {fileName}')
 
     return wordList
 

@@ -3,7 +3,7 @@
 import argparse
 import re
 
-mustHaveCharacters = list()
+mustHaveCharacters = set()
 letterWeight = {"e": 1116, "a": 849, "r": 758, "i": 754, "o": 716,
                 "t": 695, "n": 665, "s": 574, "l": 549, "c": 454,
                 "u": 363, "d": 338, "p": 317, "m": 301, "h": 300,
@@ -30,17 +30,20 @@ def removeCharacterFromPattern(pattern, wordCharacter, patternCharacter):
 
 def updatePattern(index, patternList, wordCharacter, resultCharacter, resultPattern):
     if resultCharacter == 'x':
-        for i in range(5):
-            patternList[i] = removeCharacterFromPattern(patternList[i], wordCharacter, resultPattern[i])
+        if wordCharacter in mustHaveCharacters:
+            patternList[index] = removeCharacterFromPattern(patternList[index], wordCharacter, resultPattern[index])
+        else:
+            for i in range(5):
+                patternList[i] = removeCharacterFromPattern(patternList[i], wordCharacter, resultPattern[i])
 
     if resultCharacter == 'y':
         value = removeCharacterFromPattern(patternList[index], wordCharacter, resultPattern[index])
         patternList[index] = value
-        mustHaveCharacters.append(wordCharacter)
+        mustHaveCharacters.add(wordCharacter)
 
     if resultCharacter == 'g':
         patternList[index] = wordCharacter
-        mustHaveCharacters.append(wordCharacter)
+        mustHaveCharacters.add(wordCharacter)
 
     return patternList
 

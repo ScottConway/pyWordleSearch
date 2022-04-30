@@ -167,12 +167,12 @@ def main():
                 "position: ")
             goodPattern = validatePattern(result)
 
-        printPattern(patternList)
+        # printPattern(patternList)
 
         patternList = updatePatternList(patternList, testWord, result)
         checkPattern = buildPattern(patternList)
 
-        printPattern(patternList)
+        # printPattern(patternList)
 
         wordList = narrowWordList(wordList, checkPattern)
         commonWordList = narrowWordList(commonWordList, checkPattern)

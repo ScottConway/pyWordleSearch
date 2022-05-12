@@ -64,14 +64,19 @@ def determineWeight(word):
     wordSum = 0
     firstLetter = word[0]
     lastLetter = word[4]
+    uniqueLetters = set()
+
     for letter in word:
         wordSum += letterWeight[letter]
+        uniqueLetters.add(letter)
 
     if "taodw".find(firstLetter) != -1:
         wordSum += 1000
 
     if "esdt".find(lastLetter) != -1:
         wordSum += 1000
+
+    wordSum += (1000 * len(uniqueLetters))
 
     return wordSum
 

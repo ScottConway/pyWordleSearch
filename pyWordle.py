@@ -9,6 +9,12 @@ letterWeight = {"e": 1116, "a": 849, "r": 758, "i": 754, "o": 716,
                 "u": 363, "d": 338, "p": 317, "m": 301, "h": 300,
                 "g": 247, "b": 207, "f": 181, "y": 178, "w": 129,
                 "k": 110, "v": 101, "x": 29, "z": 27, "j": 20, "q": 19}
+firstLetterWeight = {'w': 411, 'n': 325, 's': 1560, 'f': 595, 'p': 857, 'c': 920, 'b': 908, 't': 815, 'l': 575, 'd': 681, 'h': 488, 'j': 202, 'k': 375, 'a': 736, 'v': 242, 'o': 262, 'g': 637, 'e': 303, 'r': 628, 'i': 165, 'm': 693, 'z': 105, 'u': 189, 'q': 78, 'y': 181, 'x': 16}
+secondLetterWeight = {'o': 2093, 'i': 1380, 'w': 163, 'e': 1626, 'y': 267, 'l': 697, 't': 239, 'a': 2260, 'r': 940, 'h': 544, 'u': 1185, 'b': 81, 'x': 57, 'm': 188, 's': 93, 'n': 345, 'v': 52, 'd': 84, 'g': 75, 'f': 24, 'p': 228, 'k': 95, 'c': 176, 'q': 15, 'z': 29, 'j': 11}
+thirdLetterWeight = {'m': 510, 'k': 268, 'a': 1235, 'e': 882, 'l': 848, 'n': 962, 'o': 989, 'b': 334, 'u': 666, 'f': 178, 'r': 1197, 'p': 363, 'i': 1047, 's': 531, 'x': 133, 'd': 390, 't': 615, 'y': 213, 'g': 362, 'w': 271, 'v': 240, 'c': 392, 'h': 120, 'z': 142, 'q': 13, 'j': 46}
+fourthLetterWeight = {'e': 2323, 'a': 1073, 'c': 406, 'n': 786, 'g': 422, 'r': 716, 'd': 471, 'p': 418, 'o': 696, 'i': 880, 's': 515, 't': 897, 'l': 771, 'm': 402, 'u': 401, 'k': 500, 'f': 233, 'y': 108, 'w': 128, 'z': 126, 'h': 235, 'v': 155, 'j': 29, 'b': 242, 'x': 12, 'q': 2}
+fifthLetterWeight = {'n': 530, 'u': 67, 'k': 257, 's': 3950, 'd': 822, 'i': 280, 't': 726, 'y': 1297, 'a': 679, 'e': 1519, 'l': 475, 'h': 367, 'w': 64, 'g': 143, 'p': 147, 'c': 127, 'r': 673, 'x': 70, 'o': 388, 'm': 182, 'f': 82, 'b': 59, 'v': 4, 'z': 32, 'j': 3, 'q': 4}
+
 wordWeightDictionary = {}
 
 
@@ -61,20 +67,11 @@ def printPattern(patternList):
 
 
 def determineWeight(word):
-    wordSum = 0
-    firstLetter = word[0]
-    lastLetter = word[4]
+    wordSum = firstLetterWeight[word[0]] + secondLetterWeight[word[1]] + thirdLetterWeight[word[2]] + fourthLetterWeight[word[3]] + fifthLetterWeight[word[4]]
     uniqueLetters = set()
 
     for letter in word:
-        wordSum += letterWeight[letter]
         uniqueLetters.add(letter)
-
-    if "taodw".find(firstLetter) != -1:
-        wordSum += 1000
-
-    if "esdt".find(lastLetter) != -1:
-        wordSum += 1000
 
     wordSum += (1000 * len(uniqueLetters))
 
@@ -146,13 +143,13 @@ def getWordWeight(word):
 def main():
     parser = argparse.ArgumentParser(
         description='Helper program for wordle game.')
-    parser.add_argument('--version', action='version', version='%(prog)s 1.0.0')
+    parser.add_argument('--version', action='version', version='%(prog)s 2.0.0')
 
     patternList = ["[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]",
                    "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]"]
     checkPattern = buildPattern(patternList)
     wordList = buildWordList('fiveLetterWords.txt')
-    commonWordList = buildWordList('commonFiveLetterWords.txt')
+    commonWordList = buildWordList('wordleWords.txt')
 
     while len(checkPattern) > 5 and (len(wordList) > 1 or len(commonWordList) > 1):
         initialWordListSize = len(wordList)
@@ -189,7 +186,7 @@ def main():
         print(wordList)
 
         print(
-            f'Your choice has narrowed the common possibilities from {initialCommonSetSize} to {updatedCommonSetSize}')
+            f'Your choice has narrowed the wordle possibilities from {initialCommonSetSize} to {updatedCommonSetSize}')
         commonWordList.sort(key=getWordWeight, reverse=True)
         print(commonWordList)
 

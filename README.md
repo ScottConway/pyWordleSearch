@@ -35,6 +35,13 @@ The idea is to type in a five letter word then type in the result returned from 
 >
 >Process finished with exit code 0
 
+## Changes in version 2.0.0
+
+Replaced the commonFiveLetterWords.txt with a word list from https://github.com/tabatkins/wordle-list which is supposed
+to have been taken from the Wordle source code.
+
+Changed the generic letter weight map with weight maps generated from https://github.com/ScottConway/pyWordleStats
+
 
 ## Todo list
 

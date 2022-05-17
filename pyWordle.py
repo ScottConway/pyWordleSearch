@@ -244,6 +244,7 @@ def main():
         updatedwordListSize = len(wordList)
         updatedCommonSetSize = len(commonWordList)
 
+        print("")
         print(
             f'Your choice has narrowed the possibilities of Wordle words from {initialWordListSize} to {updatedwordListSize}')
         wordList.sort(key=getWordWeight, reverse=True)

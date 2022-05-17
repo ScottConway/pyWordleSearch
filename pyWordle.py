@@ -2,6 +2,7 @@
 
 import argparse
 import re
+from operator import itemgetter
 
 mustHaveCharacters = set()
 letterWeight = {"e": 1116, "a": 849, "r": 758, "i": 754, "o": 716,
@@ -140,16 +141,34 @@ def getWordWeight(word):
     return wordWeightDictionary[word]
 
 
+def printTopWordleWeightWords():
+    print("Top weighted Wordle Words")
+    count = 0
+    for k, v in sorted(wordWeightDictionary.items(), key=itemgetter(1), reverse=True):
+        print(f'{k}, {v}')
+        count += 1
+        if count > 10:
+            break
+
+
+def narrowFullWordList(fullWordList, commonWordList, wordleWordList):
+    fullWordSet = set(fullWordList)
+    fullWordSet = fullWordSet.difference(commonWordList).difference(wordleWordList)
+    return list(fullWordSet)
+
+
 def main():
     parser = argparse.ArgumentParser(
         description='Helper program for wordle game.')
-    parser.add_argument('--version', action='version', version='%(prog)s 2.0.0')
+    parser.add_argument('--version', action='version', version='%(prog)s 2.0.1')
 
     patternList = ["[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]",
                    "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]"]
     checkPattern = buildPattern(patternList)
-    wordList = buildWordList('fiveLetterWords.txt')
-    commonWordList = buildWordList('wordleWords.txt')
+    wordList = buildWordList('wordleWords.txt')
+    printTopWordleWeightWords()
+    commonWordList = buildWordList('commonFiveLetterWords.txt')
+    fullWordList = buildWordList('fiveLetterWords.txt')
 
     while len(checkPattern) > 5 and (len(wordList) > 1 or len(commonWordList) > 1):
         initialWordListSize = len(wordList)
@@ -178,17 +197,26 @@ def main():
 
         wordList = narrowWordList(wordList, checkPattern)
         commonWordList = narrowWordList(commonWordList, checkPattern)
+        fullWordList = narrowWordList(fullWordList, checkPattern)
+
+        fullWordList = narrowFullWordList(fullWordList=fullWordList, commonWordList=commonWordList, wordleWordList=wordList)
         updatedwordListSize = len(wordList)
         updatedCommonSetSize = len(commonWordList)
 
-        print(f'Your choice has narrowed the full possibilities from {initialWordListSize} to {updatedwordListSize}')
+        print(f'Your choice has narrowed the possibilities of Wordle words from {initialWordListSize} to {updatedwordListSize}')
         wordList.sort(key=getWordWeight, reverse=True)
         print(wordList)
 
-        print(
-            f'Your choice has narrowed the wordle possibilities from {initialCommonSetSize} to {updatedCommonSetSize}')
-        commonWordList.sort(key=getWordWeight, reverse=True)
-        print(commonWordList)
+        if len(commonWordList) > 0:
+            print(
+                f'Your choice has narrowed the common possibilities from {initialCommonSetSize} to {updatedCommonSetSize}')
+            commonWordList.sort(key=getWordWeight, reverse=True)
+            print(commonWordList)
+
+        if len(fullWordList) > 0:
+            print("Exotic words")
+            fullWordList.sort(key=getWordWeight, reverse=True)
+            print(fullWordList)
 
 
 if __name__ == '__main__':

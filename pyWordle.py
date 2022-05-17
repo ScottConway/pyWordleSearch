@@ -165,8 +165,10 @@ def main():
     patternList = ["[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]",
                    "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]"]
     checkPattern = buildPattern(patternList)
+
     wordList = buildWordList('wordleWords.txt')
-    printTopWordleWeightWords()
+    # uncomment to see a list of top wordle words by letter weight
+    #printTopWordleWeightWords()
     commonWordList = buildWordList('commonFiveLetterWords.txt')
     fullWordList = buildWordList('fiveLetterWords.txt')
 

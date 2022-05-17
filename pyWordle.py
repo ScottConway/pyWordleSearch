@@ -5,16 +5,22 @@ import re
 from operator import itemgetter
 
 mustHaveCharacters = set()
-letterWeight = {"e": 1116, "a": 849, "r": 758, "i": 754, "o": 716,
-                "t": 695, "n": 665, "s": 574, "l": 549, "c": 454,
-                "u": 363, "d": 338, "p": 317, "m": 301, "h": 300,
-                "g": 247, "b": 207, "f": 181, "y": 178, "w": 129,
-                "k": 110, "v": 101, "x": 29, "z": 27, "j": 20, "q": 19}
-firstLetterWeight = {'w': 411, 'n': 325, 's': 1560, 'f': 595, 'p': 857, 'c': 920, 'b': 908, 't': 815, 'l': 575, 'd': 681, 'h': 488, 'j': 202, 'k': 375, 'a': 736, 'v': 242, 'o': 262, 'g': 637, 'e': 303, 'r': 628, 'i': 165, 'm': 693, 'z': 105, 'u': 189, 'q': 78, 'y': 181, 'x': 16}
-secondLetterWeight = {'o': 2093, 'i': 1380, 'w': 163, 'e': 1626, 'y': 267, 'l': 697, 't': 239, 'a': 2260, 'r': 940, 'h': 544, 'u': 1185, 'b': 81, 'x': 57, 'm': 188, 's': 93, 'n': 345, 'v': 52, 'd': 84, 'g': 75, 'f': 24, 'p': 228, 'k': 95, 'c': 176, 'q': 15, 'z': 29, 'j': 11}
-thirdLetterWeight = {'m': 510, 'k': 268, 'a': 1235, 'e': 882, 'l': 848, 'n': 962, 'o': 989, 'b': 334, 'u': 666, 'f': 178, 'r': 1197, 'p': 363, 'i': 1047, 's': 531, 'x': 133, 'd': 390, 't': 615, 'y': 213, 'g': 362, 'w': 271, 'v': 240, 'c': 392, 'h': 120, 'z': 142, 'q': 13, 'j': 46}
-fourthLetterWeight = {'e': 2323, 'a': 1073, 'c': 406, 'n': 786, 'g': 422, 'r': 716, 'd': 471, 'p': 418, 'o': 696, 'i': 880, 's': 515, 't': 897, 'l': 771, 'm': 402, 'u': 401, 'k': 500, 'f': 233, 'y': 108, 'w': 128, 'z': 126, 'h': 235, 'v': 155, 'j': 29, 'b': 242, 'x': 12, 'q': 2}
-fifthLetterWeight = {'n': 530, 'u': 67, 'k': 257, 's': 3950, 'd': 822, 'i': 280, 't': 726, 'y': 1297, 'a': 679, 'e': 1519, 'l': 475, 'h': 367, 'w': 64, 'g': 143, 'p': 147, 'c': 127, 'r': 673, 'x': 70, 'o': 388, 'm': 182, 'f': 82, 'b': 59, 'v': 4, 'z': 32, 'j': 3, 'q': 4}
+
+firstLetterWeight = {'w': 411, 'n': 325, 's': 1560, 'f': 595, 'p': 857, 'c': 920, 'b': 908, 't': 815, 'l': 575,
+                     'd': 681, 'h': 488, 'j': 202, 'k': 375, 'a': 736, 'v': 242, 'o': 262, 'g': 637, 'e': 303, 'r': 628,
+                     'i': 165, 'm': 693, 'z': 105, 'u': 189, 'q': 78, 'y': 181, 'x': 16}
+secondLetterWeight = {'o': 2093, 'i': 1380, 'w': 163, 'e': 1626, 'y': 267, 'l': 697, 't': 239, 'a': 2260, 'r': 940,
+                      'h': 544, 'u': 1185, 'b': 81, 'x': 57, 'm': 188, 's': 93, 'n': 345, 'v': 52, 'd': 84, 'g': 75,
+                      'f': 24, 'p': 228, 'k': 95, 'c': 176, 'q': 15, 'z': 29, 'j': 11}
+thirdLetterWeight = {'m': 510, 'k': 268, 'a': 1235, 'e': 882, 'l': 848, 'n': 962, 'o': 989, 'b': 334, 'u': 666,
+                     'f': 178, 'r': 1197, 'p': 363, 'i': 1047, 's': 531, 'x': 133, 'd': 390, 't': 615, 'y': 213,
+                     'g': 362, 'w': 271, 'v': 240, 'c': 392, 'h': 120, 'z': 142, 'q': 13, 'j': 46}
+fourthLetterWeight = {'e': 2323, 'a': 1073, 'c': 406, 'n': 786, 'g': 422, 'r': 716, 'd': 471, 'p': 418, 'o': 696,
+                      'i': 880, 's': 515, 't': 897, 'l': 771, 'm': 402, 'u': 401, 'k': 500, 'f': 233, 'y': 108,
+                      'w': 128, 'z': 126, 'h': 235, 'v': 155, 'j': 29, 'b': 242, 'x': 12, 'q': 2}
+fifthLetterWeight = {'n': 530, 'u': 67, 'k': 257, 's': 3950, 'd': 822, 'i': 280, 't': 726, 'y': 1297, 'a': 679,
+                     'e': 1519, 'l': 475, 'h': 367, 'w': 64, 'g': 143, 'p': 147, 'c': 127, 'r': 673, 'x': 70, 'o': 388,
+                     'm': 182, 'f': 82, 'b': 59, 'v': 4, 'z': 32, 'j': 3, 'q': 4}
 
 wordWeightDictionary = {}
 
@@ -55,11 +61,13 @@ def updatePattern(index, patternList, wordCharacter, resultCharacter, resultPatt
     return patternList
 
 
-def updatePatternList(patternList, testWord, result):
+def updatePatternList(patternList, testWord, result, untriedPatternList):
     for i in range(5):
         patternList = updatePattern(i, patternList, testWord[i], result[i], result)
+        for y in range(5):
+            untriedPatternList[y] = untriedPatternList[y].replace(testWord[i], "")
 
-    return patternList
+    return patternList, untriedPatternList
 
 
 def printPattern(patternList):
@@ -68,7 +76,8 @@ def printPattern(patternList):
 
 
 def determineWeight(word):
-    wordSum = firstLetterWeight[word[0]] + secondLetterWeight[word[1]] + thirdLetterWeight[word[2]] + fourthLetterWeight[word[3]] + fifthLetterWeight[word[4]]
+    wordSum = firstLetterWeight[word[0]] + secondLetterWeight[word[1]] + thirdLetterWeight[word[2]] + \
+              fourthLetterWeight[word[3]] + fifthLetterWeight[word[4]]
     uniqueLetters = set()
 
     for letter in word:
@@ -116,6 +125,17 @@ def narrowWordList(wordList, pattern):
     return newWordList
 
 
+def narrowUntriedWordList(wordList, pattern):
+    newWordList = list()
+    for word in wordList:
+        match = re.match(pattern, word)
+
+        if match:
+            newWordList.append(word)
+
+    return newWordList
+
+
 def validateWord(testWord):
     goodWord = True
 
@@ -157,18 +177,31 @@ def narrowFullWordList(fullWordList, commonWordList, wordleWordList):
     return list(fullWordSet)
 
 
+def printTopTenUntriedWords(wordList):
+    if len(wordList) > 0:
+        print("Top suggestions from all untried letters")
+        wordList.sort(key=getWordWeight, reverse=True)
+        print(wordList[0:10])
+
+
 def main():
     parser = argparse.ArgumentParser(
         description='Helper program for wordle game.')
-    parser.add_argument('--version', action='version', version='%(prog)s 2.0.1')
+    parser.add_argument('--version', action='version', version='%(prog)s 2.1.0')
 
     patternList = ["[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]",
                    "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]"]
     checkPattern = buildPattern(patternList)
 
+    untriedPatternList = ["[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]",
+                          "[abcdefghijklmnopqrstuvwxyz]",
+                          "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]"]
+    untriedCheckPattern = buildPattern(untriedPatternList)
+
     wordList = buildWordList('wordleWords.txt')
+    untriedWords = list(wordList)
     # uncomment to see a list of top wordle words by letter weight
-    #printTopWordleWeightWords()
+    # printTopWordleWeightWords()
     commonWordList = buildWordList('commonFiveLetterWords.txt')
     fullWordList = buildWordList('fiveLetterWords.txt')
 
@@ -179,6 +212,10 @@ def main():
         result = ""
         goodWord = False
         goodPattern = False
+
+        #printPattern(untriedPatternList)
+        untriedWords = narrowUntriedWordList(untriedWords, untriedCheckPattern)
+        printTopTenUntriedWords(wordList=untriedWords)
 
         while not goodWord:
             testWord = input("Word entered in wordle: ")
@@ -192,8 +229,9 @@ def main():
 
         # printPattern(patternList)
 
-        patternList = updatePatternList(patternList, testWord, result)
+        patternList, untriedPatternList = updatePatternList(patternList, testWord, result, untriedPatternList)
         checkPattern = buildPattern(patternList)
+        untriedCheckPattern = buildPattern(untriedPatternList)
 
         # printPattern(patternList)
 
@@ -201,11 +239,13 @@ def main():
         commonWordList = narrowWordList(commonWordList, checkPattern)
         fullWordList = narrowWordList(fullWordList, checkPattern)
 
-        fullWordList = narrowFullWordList(fullWordList=fullWordList, commonWordList=commonWordList, wordleWordList=wordList)
+        fullWordList = narrowFullWordList(fullWordList=fullWordList, commonWordList=commonWordList,
+                                          wordleWordList=wordList)
         updatedwordListSize = len(wordList)
         updatedCommonSetSize = len(commonWordList)
 
-        print(f'Your choice has narrowed the possibilities of Wordle words from {initialWordListSize} to {updatedwordListSize}')
+        print(
+            f'Your choice has narrowed the possibilities of Wordle words from {initialWordListSize} to {updatedwordListSize}')
         wordList.sort(key=getWordWeight, reverse=True)
         print(wordList)
 

@@ -187,7 +187,7 @@ def printTopTenUntriedWords(wordList):
 def main():
     parser = argparse.ArgumentParser(
         description='Helper program for wordle game.')
-    parser.add_argument('--version', action='version', version='%(prog)s 2.1.0')
+    parser.add_argument('--version', action='version', version='%(prog)s 2.2.0')
 
     patternList = ["[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]",
                    "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]"]
@@ -219,12 +219,22 @@ def main():
 
         while not goodWord:
             testWord = input("Word entered in wordle: ")
+            splitWord = False
+            if len(testWord) > 5 and testWord[5] == '-':
+                result = testWord[-5:]
+                testWord = testWord[0:5]
+                splitWord = True
+
             goodWord = validateWord(testWord)
 
         while not goodPattern:
-            result = input(
-                "Enter result from wordle x - no match, y - match wrong position, g - correct letter in correct "
-                "position: ")
+            if not splitWord:
+                result = input(
+                    "Enter result from wordle x - no match, y - match wrong position, g - correct letter in correct "
+                    "position: ")
+            else:
+                splitWord = False
+
             goodPattern = validatePattern(result)
 
         # printPattern(patternList)

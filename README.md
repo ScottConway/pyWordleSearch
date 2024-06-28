@@ -77,3 +77,12 @@ At the beginning of each iteration print a list of most possible words from untr
 Now you can enter the word and pattern at the first prompt delimited by a dash. 
 
 `Word entered in wordle: cares-xxxxg`
+
+## Changes in version 2.3.0
+
+Added a new list of alternate words weighted by letters marked by y in the pattern the highest if you want to narrow 
+down where the yellows should really go. 
+
+If you determine a letter is yellow or green and later mark it with an x in the pattern you will now get an error message.   
+Similarly if you mark a letter as x and then later mark it as y or g you will get an error.   This will hopefully prevent 
+errors due to typos in the pattern. 

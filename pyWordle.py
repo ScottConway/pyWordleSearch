@@ -2,6 +2,7 @@
 
 import argparse
 import re
+import sys
 from operator import itemgetter
 
 mustHaveCharacters = set()
@@ -23,6 +24,7 @@ fifthLetterWeight = {'n': 530, 'u': 67, 'k': 257, 's': 3950, 'd': 822, 'i': 280,
                      'm': 182, 'f': 82, 'b': 59, 'v': 4, 'z': 32, 'j': 3, 'q': 4}
 
 wordWeightDictionary = {}
+letterUsage = {}
 
 
 def buildPattern(patternList):
@@ -41,15 +43,17 @@ def removeCharacterFromPattern(pattern, wordCharacter, patternCharacter):
     return pattern
 
 
-def updatePattern(index, patternList, wordCharacter, resultCharacter, resultPattern):
+def updatePattern(index, patternList, wordCharacter, resultCharacter, resultPattern, yPatternList):
     if resultCharacter == 'x':
         if wordCharacter in mustHaveCharacters:
             patternList[index] = removeCharacterFromPattern(patternList[index], wordCharacter, resultPattern[index])
         else:
             for i in range(5):
                 patternList[i] = removeCharacterFromPattern(patternList[i], wordCharacter, resultPattern[i])
+                yPatternList[i] = removeCharacterFromPattern(yPatternList[i], wordCharacter, resultPattern[i])
 
     if resultCharacter == 'y':
+        yPatternList[index] = removeCharacterFromPattern(yPatternList[index], wordCharacter, resultPattern[index])
         value = removeCharacterFromPattern(patternList[index], wordCharacter, resultPattern[index])
         patternList[index] = value
         mustHaveCharacters.add(wordCharacter)
@@ -58,16 +62,16 @@ def updatePattern(index, patternList, wordCharacter, resultCharacter, resultPatt
         patternList[index] = wordCharacter
         mustHaveCharacters.add(wordCharacter)
 
-    return patternList
+    return patternList, yPatternList
 
 
-def updatePatternList(patternList, testWord, result, untriedPatternList):
+def updatePatternList(patternList, testWord, result, untriedPatternList, yPatternList):
     for i in range(5):
-        patternList = updatePattern(i, patternList, testWord[i], result[i], result)
+        patternList, yPatternList = updatePattern(i, patternList, testWord[i], result[i], result, yPatternList)
         for y in range(5):
             untriedPatternList[y] = untriedPatternList[y].replace(testWord[i], "")
 
-    return patternList, untriedPatternList
+    return patternList, untriedPatternList, yPatternList
 
 
 def printPattern(patternList):
@@ -161,6 +165,20 @@ def getWordWeight(word):
     return wordWeightDictionary[word]
 
 
+def getWordYWeight(word):
+    wordWeight = 0
+    for letter in word:
+        lu = 'x' if letter not in letterUsage.keys() else letterUsage[letter]
+        if lu == 'y':
+            wordWeight += 10000
+        elif lu == 'g':
+            wordWeight += 1
+        else:
+            wordWeight += 100
+
+    return wordWeight
+
+
 def printTopWordleWeightWords():
     print("Top weighted Wordle Words")
     count = 0
@@ -184,10 +202,24 @@ def printTopTenUntriedWords(wordList):
         print(wordList[0:10])
 
 
+def changedPattern(goodWord, goodPattern):
+    for i in range(5):
+        wordLetter = goodWord[i]
+        pattern = goodPattern[i]
+        if wordLetter not in letterUsage.keys():
+            letterUsage.update({wordLetter: pattern})
+        elif pattern != letterUsage[wordLetter] and (pattern == 'x' or letterUsage[wordLetter] == 'x'):
+            print(
+                f'You have entered a different pattern for {wordLetter}!  Previous pattern was {letterUsage[wordLetter]} but this time you entered {pattern}.')
+            return True
+
+    return False
+
+
 def main():
     parser = argparse.ArgumentParser(
         description='Helper program for wordle game.')
-    parser.add_argument('--version', action='version', version='%(prog)s 2.2.0')
+    parser.add_argument('--version', action='version', version='%(prog)s 2.3.0')
 
     patternList = ["[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]",
                    "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]"]
@@ -198,8 +230,13 @@ def main():
                           "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]"]
     untriedCheckPattern = buildPattern(untriedPatternList)
 
-    wordList = buildWordList('wordleWords.txt')
-    untriedWords = list(wordList)
+    yPatternList = ["[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]",
+                    "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]"]
+    yCheckPattern = buildPattern(yPatternList)
+
+    originalWordList = buildWordList('wordleWords.txt')
+    wordList = list(originalWordList)
+    untriedWords = list(originalWordList)
     # uncomment to see a list of top wordle words by letter weight
     # printTopWordleWeightWords()
     commonWordList = buildWordList('commonFiveLetterWords.txt')
@@ -213,9 +250,13 @@ def main():
         goodWord = False
         goodPattern = False
 
+        yWordList = list(originalWordList)
+        initialYWordListSize = len(yWordList)
+
         #printPattern(untriedPatternList)
         untriedWords = narrowUntriedWordList(untriedWords, untriedCheckPattern)
         printTopTenUntriedWords(wordList=untriedWords)
+        splitWord = False
 
         while not goodWord:
             testWord = input("Word entered in wordle: ")
@@ -237,22 +278,30 @@ def main():
 
             goodPattern = validatePattern(result)
 
+        if changedPattern(testWord, result):
+            print("Exiting program - please rerun with results to update pattern.")
+            sys.exit(1)
+
         # printPattern(patternList)
 
-        patternList, untriedPatternList = updatePatternList(patternList, testWord, result, untriedPatternList)
+        patternList, untriedPatternList, yPatternList = updatePatternList(patternList, testWord, result,
+                                                                          untriedPatternList, yPatternList)
         checkPattern = buildPattern(patternList)
         untriedCheckPattern = buildPattern(untriedPatternList)
+        yCheckPattern = buildPattern(yPatternList)
 
         # printPattern(patternList)
 
         wordList = narrowWordList(wordList, checkPattern)
         commonWordList = narrowWordList(commonWordList, checkPattern)
         fullWordList = narrowWordList(fullWordList, checkPattern)
+        yWordList = narrowWordList(yWordList, yCheckPattern)
 
         fullWordList = narrowFullWordList(fullWordList=fullWordList, commonWordList=commonWordList,
                                           wordleWordList=wordList)
         updatedwordListSize = len(wordList)
         updatedCommonSetSize = len(commonWordList)
+        updatedYWordListSize = len(yWordList)
 
         print("")
         print(
@@ -270,6 +319,13 @@ def main():
             print("Exotic words")
             fullWordList.sort(key=getWordWeight, reverse=True)
             print(fullWordList)
+
+        if len(yWordList) > 0 and updatedYWordListSize < initialYWordListSize:
+            print(
+                f'Y weighted word list possibilities from {initialYWordListSize} to {updatedYWordListSize}')
+            yWordList.sort(key=getWordYWeight, reverse=True)
+            print("Top ten y list")
+            print(yWordList[0:10])
 
 
 if __name__ == '__main__':

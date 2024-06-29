@@ -166,15 +166,17 @@ def getWordWeight(word):
 
 
 def getWordYWeight(word):
+    usedLetters = set()
     wordWeight = 0
     for letter in word:
         lu = 'x' if letter not in letterUsage.keys() else letterUsage[letter]
         if lu == 'y':
-            wordWeight += 10000
+            wordWeight += 10000 if letter not in usedLetters else 100
         elif lu == 'g':
-            wordWeight += 1
+            wordWeight += 10 if letter not in usedLetters else 1
         else:
-            wordWeight += 100
+            wordWeight += 100 if letter not in usedLetters else 25
+        usedLetters.add(letter)
 
     return wordWeight
 
@@ -219,7 +221,7 @@ def changedPattern(goodWord, goodPattern):
 def main():
     parser = argparse.ArgumentParser(
         description='Helper program for wordle game.')
-    parser.add_argument('--version', action='version', version='%(prog)s 2.3.0')
+    parser.add_argument('--version', action='version', version='%(prog)s 2.4.0')
 
     patternList = ["[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]",
                    "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]"]
@@ -278,6 +280,10 @@ def main():
 
             goodPattern = validatePattern(result)
 
+        if result == 'ggggg':
+            print("Good job!")
+            sys.exit(0)
+
         if changedPattern(testWord, result):
             print("Exiting program - please rerun with results to update pattern.")
             sys.exit(1)
@@ -307,18 +313,18 @@ def main():
         print(
             f'Your choice has narrowed the possibilities of Wordle words from {initialWordListSize} to {updatedwordListSize}')
         wordList.sort(key=getWordWeight, reverse=True)
-        print(wordList)
+        print(wordList[0:25])
 
         if len(commonWordList) > 0:
             print(
                 f'Your choice has narrowed the common possibilities from {initialCommonSetSize} to {updatedCommonSetSize}')
             commonWordList.sort(key=getWordWeight, reverse=True)
-            print(commonWordList)
+            print(commonWordList[0:25])
 
         if len(fullWordList) > 0:
             print("Exotic words")
             fullWordList.sort(key=getWordWeight, reverse=True)
-            print(fullWordList)
+            print(fullWordList[0:25])
 
         if len(yWordList) > 0 and updatedYWordListSize < initialYWordListSize:
             print(

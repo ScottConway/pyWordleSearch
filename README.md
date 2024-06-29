@@ -7,56 +7,73 @@ The idea is to type in a five letter word then type in the result returned from 
 
 ### example
 
->sconway@Scott-Conways-MacBook pyWordleSearch % ./pyWordle.py
-> 
 >Top suggestions from all untried letters
-> 
 >['cares', 'bares', 'pares', 'tares', 'cores', 'bores', 'mares', 'pores', 'canes', 'dares']
+>Word entered in wordle: atone-xxxyy
 >
->Word entered in wordle: atone
+>Your choice has narrowed the possibilities of Wordle words from 12947 to 269
 > 
->Enter result from wordle x - no match, y - match wrong position, g - correct letter in correct position: yxyxx
+>['cines', 'bines', 'pines', 'mines', 'dines', 'rines', 'fines', 'lines', 'sines', 'dunes', 'runes', 'wines', 'lunes', 'kines', 'vines', 'benes', 'zines', 'penes', 'menes', 'denes', 'genes', 'lenes', 'senes', 'nides', 'pynes']
 > 
->Your choice has narrowed the possibilities of Wordle words from 12947 to 361
+>Your choice has narrowed the common possibilities from 530 to 10
 > 
->['boras', 'moras', 'coals', 'goras', 'boars', 'colas', 'soras', 'bolas', 'horas', 'faros', 'koras', 'boaks', 'goals', 'calos', 'saros', 'molas', 'foals', 'haros', 'soars', 'comas', 'bomas', 'solas', 'hoars', 'karos', 'codas', 'goads', 'roads', 'kolas', 'soaks', 'camos', 'loads', 'roams', 'foams', 'soaps', 'loams', 'halos', 'voars', 'doabs', 'lomas', 'capos', 'somas', 'dopas', 'woads', 'pacos', 'goafs', 'homas', 'loafs', 'mowas', 'koaps', 'socas', 'sodas', 'moyas', 'sobas', 'dagos', 'moxas', 'gapos', 'fados', 'soyas', 'hokas', 'makos', 'sados', 'sofas', 'sagos', 'hoyas', 'mayos', 'sojas', 'praos', 'yogas', 'kagos', 'lazos', 'roars', 'kohas', 'gajos', 'kayos', 'jiaos', 'cocas', 'boabs', 'bobas', 'chaos', 'dosas', 'orals', 'uraos', 'oumas', 'dados', 'oasis', 'ohias', 'oupas', 'kokas', 'orcas', 'soapy', 'okras', 'sarod', 'opals', 'obias', 'soral', 'moray', 'coaly', 'odals', 'ovals', 'foray', 'solar', 'savoy', 'coady', 'sorda', 'goary', 'solah', 'ogams', 'opahs', 'ollas', 'hoary', 'sargo', 'board', 'coria', 'odahs', 'coral', 'copay', 'boral', 'poral', 'sowar', 'okays', 'foamy', 'loamy', 'bolar', 'ofays', 'sofar', 'sapor', 'carol', 'polar', 'moria', 'hoagy', 'moral', 'borak', 'salop', 'parol', 'goral', 'coram', 'savor', 'sopra', 'molar', 'sokah', 'hoard', 'borax', 'woald', 'horal', 'carom', 'sorra', 'moira', 'bardo', 'salvo', 'cargo', 'douar', 'dolia', 'dorsa', 'foram', 'carob', 'pargo', 'folia', 'comal', 'coarb', 'korai', 'carbo', 'pagod', 'polka', 'roary', 'boyar', 'sambo', 'poach', 'volar', 'copal', 'cobia', 'podia', 'dorba', 'doula', 'maiko', 'podal', 'daiko', 'dorad', 'parvo', 'largo', 'salol', 'doura', 'cowal', 'domal', 'voila', 'gobar', 'dowar', 'goura', 'rolag', 'romal', 'copra', 'pokal', 'lobar', 'joram', 'korma', 'cobra', 'roach', 'modal', 'garbo', 'valor', 'dolma', 'payor', 'coala', 'coxal', 'forza', 'loach', 'colza', 'boyla', 'dosai', 'sajou', 'focal', 'logia', 'galop', 'boxla', 'dobla', 'radio', 'pilao', 'labor', 'mayor', 'koura', 'douma', 'maror', 'joual', 'dobra', 'campo', 'royal', 'barro', 'roral', 'favor', 'mowra', 'macro', 'qorma', 'yarco', 'gopak', 'louma', 'loral', 'kogal', 'waldo', 'morra', 'major', 'coyau', 'poaka', 'raupo', 'boyau', 'pulao', 'gompa', 'basho', 'jowar', 'galvo', 'vocal', 'hopak', 'cohab', 'vapor', 'shako', 'dosha', 'horah', 'dogma', 'gadso', 'molal', 'farro', 'jalop', 'koala', 'cobza', 'bayou', 'oracy', 'baloo', 'rojak', 'mocha', 'molla', 'miaou', 'saddo', 'miaow', 'cahow', 'gambo', 'coach', 'mohua', 'chiao', 'macho', 'claro', 'wacko', 'karoo', 'vodka', 'spado', 'holla', 'hodad', 'vocab', 'guaco', 'havoc', 'diazo', 'kapow', 'yapok', 'hallo', 'gadjo', 'hodja', 'bobak', 'draco', 'bravo', 'local', 'comma', 'jambo', 'basso', 'ovary', 'chado', 'bobac', 'casco', 'zambo', 'bocca', 'yakow', 'loyal', 'fossa', 'razor', 'bazoo', 'oakum', 'bacco', 'yowza', 'caboc', 'lasso', 'cabob', 'orach', 'ouija', 'kokra', 'orgia', 'gazoo', 'razoo', 'mambo', 'omrah', 'cacao', 'volva', 'kokam', 'orval', 'whamo', 'kapok', 'wokka', 'orixa', 'koppa', 'wazoo', 'wahoo', 'kazoo', 'cocoa', 'omlah', 'kabob', 'zoppa', 'yahoo', 'oidia', 'baboo', 'oscar', 'chaco', 'lazzo', 'poppa', 'imago', 'momma', 'oflag', 'okapi', 'igapo', 'gogga', 'ollav', 'omasa', 'ogham', 'oshac', 'ossia', 'occam', 'offal']
-> 
->Your choice has narrowed the common possibilities from 530 to 13
-> 
->['board', 'moral', 'howay', 'radio', 'royal', 'major', 'coach', 'wacko', 'havoc', 'kapow', 'hallo', 'bravo', 'local']
+>['henry', 'green', 'begin', 'newly', 'never', 'queen', 'under', 'inner', 'index', 'enemy']
 > 
 >Exotic words
 > 
->['maros', 'cados', 'fogas', 'cayos', 'wocas', 'pahos', 'wokas', 'kados', 'vamos', 'majos', 'jakos', 'basos', 'orias', 'soary', 'solay', 'soaky', 'ozias', 'doray', 'foaly', 'coaid', 'sarpo', 'somal', 'poria', 'sorva', 'corah', 'soapi', 'coaxy', 'carlo', 'doria', 'woady', 'salmo', 'mario', 'solfa', 'calor', 'sofia', 'balor', 'bailo', 'cafoy', 'baroi', 'cairo', 'fario', 'sacro', 'cardo', 'horla', 'pardo', 'korah', 'dorab', 'marok', 'morga', 'bolag', 'marko', 'baioc', 'holia', 'vario', 'forma', 'koila', 'codal', 'dargo', 'marco', 'bocal', 'copia', 'polab', 'fardo', 'occas', 'molka', 'rosal', 'bagio', 'pomak', 'cabio', 'balow', 'parao', 'couma', 'palmo', 'koali', 'caroa', 'burao', 'sosia', 'oaric', 'bowla', 'samoa', 'bozal', 'dogal', 'jalor', 'mohar', 'caupo', 'voraz', 'gobia', 'pablo', 'mopla', 'karou', 'coroa', 'posca', 'gouda', 'lohar', 'dogra', 'falco', 'balao', 'korwa', 'kaimo', 'jarmo', 'pasmo', 'goala', 'daijo', 'kogia', 'loxia', 'bayok', 'gorra', 'colla', 'filao', 'volga', 'forra', 'padou', 'somma', 'daroo', 'domba', 'shado', 'iodal', 'callo', 'kogai', 'garoo', 'ballo', 'madoc', 'loasa', 'koroa', 'rambo', 'bacao', 'wasco', 'cajou', 'hawok', 'lodha', 'mowha', 'haloa', 'kouza', 'kosha', 'prado', 'couac', 'popal', 'washo', 'zosma', 'macao', 'papio', 'jacko', 'pharo', 'bossa', 'mohwa', 'huaco', 'vacuo', 'kohua', 'drago', 'zohak', 'cravo', 'gagor', 'jacob', 'kamao', 'oasal', 'pompa', 'mocoa', 'passo', 'lobal', 'ousia', 'oolak', 'oulap', 'jakob', 'coppa', 'baubo', 'oadal', 'orary', 'caddo', 'lokao', 'bahoo', 'capoc', 'homam', 'wayao', 'kokia', 'jiboa', 'oukia', 'vacoa', 'fodda', 'mafoo', 'kodak', 'magog', 'biabo', 'macco', 'vijao', 'orgal', 'flavo', 'oopak', 'oriya', 'haddo', 'cocao', 'yaboo', 'wappo', 'oliva', 'gazoz', 'crcao', 'yazoo', 'ozark', 'ovula', 'oskar', 'ygapo', 'olcha', 'oryza', 'idaho', 'oozoa', 'osaka', 'omaha', 'ossal', 'icaco']
+>['renes', 'niels', 'genys', 'hiney', 'piner', 'sumen', 'cinel', 'hiren', 'winer', 'senex', 'nizey', 'phren', 'ginep', 'chien', 'finew', 'bizen', 'snyed', 'pensy', 'riden', 'wisen', 'cerin', 'weren', 'mendy', 'renky', 'lifen']
 > 
+>Y weighted word list possibilities from 12947 to 269
+> 
+>Top ten y list
+> 
+>['mened', 'kines', 'vixen', 'yeven', 'neves', 'liney', 'enmew', 'kneel', 'enews', 'lumen']
 > 
 >Top suggestions from all untried letters
 > 
 >['cirls', 'birls', 'pirls', 'puris', 'curls', 'burls', 'dirls', 'purls', 'birks', 'girls']
 > 
->Word entered in wordle: girls
-> 
->Enter result from wordle x - no match, y - match wrong position, g - correct letter in correct position: xxxyg
-> 
->Your choice has narrowed the possibilities of Wordle words from 361 to 13
-> 
->['colas', 'bolas', 'calos', 'molas', 'solas', 'kolas', 'loads', 'loams', 'halos', 'lomas', 'loafs', 'lazos', 'ollas']
+>Word entered in wordle: pines-xxyyx
 > 
 >
+>Your choice has narrowed the possibilities of Wordle words from 269 to 16
+> 
+>['nerdy', 'nervy', 'newly', 'nelly', 'begun', 'needy', 'neeld', 'quern', 'rerun', 'neddy', 'queyn', 'neemb', 'enemy', 'knell', 'enurn', 'enzym']
+> 
+>Your choice has narrowed the common possibilities from 10 to 2
+> 
+>['newly', 'enemy']
+> 
+>Exotic words
+> 
+>['berun', 'kevyn', 'nehru', 'nebby', 'nexum', 'neffy', 'needn', 'exhbn', 'encyc']
+> 
+>Y weighted word list possibilities from 12947 to 16
+> 
+>Top ten y list
+> 
+>['nervy', 'begun', 'nerdy', 'enemy', 'enzym', 'quern', 'needy', 'neemb', 'queyn', 'neeld']
+> 
 >Top suggestions from all untried letters
 > 
->['bumpy', 'dumky', 'dumpy', 'mucky', 'ducky', 'humpy', 'duchy', 'jumpy', 'jumby', 'bumph']
+>['curly', 'burly', 'murly', 'gurly', 'curdy', 'hurly', 'murky', 'gurdy', 'durgy', 'curvy']
 > 
->Word entered in wordle: duchy
-> 
->Enter result from wordle x - no match, y - match wrong position, g - correct letter in correct position: xxxyx
-> 
->Your choice has narrowed the possibilities of Wordle words from 13 to 1
-> 
->['halos']
-> 
->sconway@Scott-Conways-MacBook pyWordleSearch %  
+>Word entered in wordle: nerdy-yggxx
 >
+>Your choice has narrowed the possibilities of Wordle words from 16 to 1
+> 
+>['rerun']
+> 
+>Exotic words
+> 
+>['berun']
+> 
+>Y weighted word list possibilities from 12947 to 3
+> 
+>Top ten y list
+> 
+>['quern', 'enurn', 'rerun']
+> 
 
 ## Changes in version 2.0.0
 
@@ -83,6 +100,16 @@ Now you can enter the word and pattern at the first prompt delimited by a dash.
 Added a new list of alternate words weighted by letters marked by y in the pattern the highest if you want to narrow 
 down where the yellows should really go. 
 
-If you determine a letter is yellow or green and later mark it with an x in the pattern you will now get an error message.   
-Similarly if you mark a letter as x and then later mark it as y or g you will get an error.   This will hopefully prevent 
+If you determine a letter is yellow or green and later mark it with an x in the pattern you will now get an error message.
+
+Similarly, if you mark a letter as x and then later mark it as y or g you will get an error.   This will hopefully prevent 
 errors due to typos in the pattern. 
+
+## Changes in version 2.4.0
+
+The common lists had no size limit causing a lot of scrolling.   Limited size of lists to 25.   
+
+If pattern is all green then print a success message instead of an empty word list. 
+
+Changed the weighting on repeated letters in the yWord weighting.   Basically if I have g, r, and f as y pattern letters then 
+in the list of y words I want to see 'grift' before I see 'fluff' 

@@ -221,7 +221,7 @@ def changedPattern(goodWord, goodPattern):
 def main():
     parser = argparse.ArgumentParser(
         description='Helper program for wordle game.')
-    parser.add_argument('--version', action='version', version='%(prog)s 2.4.0')
+    parser.add_argument('--version', action='version', version='%(prog)s 2.4.1')
 
     patternList = ["[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]",
                    "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]"]
@@ -234,7 +234,6 @@ def main():
 
     yPatternList = ["[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]",
                     "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]"]
-    yCheckPattern = buildPattern(yPatternList)
 
     originalWordList = buildWordList('wordleWords.txt')
     wordList = list(originalWordList)
@@ -284,9 +283,9 @@ def main():
             print("Good job!")
             sys.exit(0)
 
-        if changedPattern(testWord, result):
-            print("Exiting program - please rerun with results to update pattern.")
-            sys.exit(1)
+        # if changedPattern(testWord, result):
+        #     print("Exiting program - please rerun with results to update pattern.")
+        #     sys.exit(1)
 
         # printPattern(patternList)
 

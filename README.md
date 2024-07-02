@@ -113,3 +113,14 @@ If pattern is all green then print a success message instead of an empty word li
 
 Changed the weighting on repeated letters in the yWord weighting.   Basically if I have g, r, and f as y pattern letters then 
 in the list of y words I want to see 'grift' before I see 'fluff' 
+
+##  Changes in version 2.4.1
+
+Commented out the feature I added in 2.3.0 where I keep a history of the pattern entered for letters and if a x goes to y/g 
+vice versa I printed out an error message.   This is because I did not take into account duplicate letters.  In this 
+case I had a word veils-xgxgg and then tried bells-xgxgg and that got an error because the letter l was g in veils but 
+the FIRST l in bells was an x.   So I need to come up with an solution that takes duplicate letters into account. 
+
+By the same token I can take that knowledge and beef up my mustHaveCharacters set to a map with letters and counts 
+because using the results I can determine if there are repeating characters and ensure the words in the suggestion lists
+have those repeats. 

@@ -5,7 +5,6 @@ from code.Entry import Entry
 class WordleWordFilter(RegxWordFilter):
     def __init__(self):
         RegxWordFilter.__init__(self)
-        self.mustHaveCharacters = set()
 
     def updateSinglePattern(self, index, entry):
         patternLetter = entry.pattern[index]

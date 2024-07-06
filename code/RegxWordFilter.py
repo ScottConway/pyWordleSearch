@@ -9,6 +9,7 @@ INITIAL_PATTERN = ["[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]
 class RegxWordFilter(ABC):
     def __init__(self):
         self.filterPattern = INITIAL_PATTERN
+        self.mustHaveCharacters = set()
 
     def buildPattern(self, patternList):
         patternString = ""

@@ -2,13 +2,12 @@ import re
 from abc import ABC, abstractmethod
 from code.Entry import Entry
 
-INITIAL_PATTERN = ["[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]",
-                   "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]"]
-
 
 class RegxWordFilter(ABC):
     def __init__(self):
-        self.filterPattern = INITIAL_PATTERN
+        self.filterPattern = ["[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]",
+                              "[abcdefghijklmnopqrstuvwxyz]",
+                              "[abcdefghijklmnopqrstuvwxyz]", "[abcdefghijklmnopqrstuvwxyz]"]
         self.mustHaveCharacters = set()
 
     def buildPattern(self, patternList):

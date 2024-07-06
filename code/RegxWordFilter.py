@@ -24,7 +24,10 @@ class RegxWordFilter(ABC):
 
     def updatefilterPattern(self, entry):
         for i in range(5):
+            # print(self.filterPattern)
             self.filterPattern = self.updateSinglePattern(i, entry)
+            # print(self.filterPattern)
+            # print('--------------------------')
 
     @abstractmethod
     def updateSinglePattern(self, index, entry):

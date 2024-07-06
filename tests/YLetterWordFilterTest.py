@@ -1,5 +1,5 @@
 import unittest
-from code.WordleWordFilter import WordleWordFilter
+from code.YLetterWordFilter import YLetterWordFilter
 from code.Entry import Entry
 
 WORD1 = "abcde"
@@ -9,9 +9,9 @@ WORD4 = "broad"
 WORD5 = "board"
 
 
-class WordleWordFilterTestCase(unittest.TestCase):
+class YLetterWordFilterTestCase(unittest.TestCase):
     def setUp(self):
-        self.filter = WordleWordFilter()
+        self.filter = YLetterWordFilter()
 
     def test_initialState(self):
         self.assertTrue(self.filter.wordMatchesPattern(WORD1))
@@ -29,7 +29,7 @@ class WordleWordFilterTestCase(unittest.TestCase):
         self.assertTrue(self.filter.wordMatchesPattern(WORD4))
         self.assertTrue(self.filter.wordMatchesPattern(WORD5))
 
-    def test_greenPattern(self):
+    def test_greenDoesNothing(self):
         self.assertTrue(self.filter.wordMatchesPattern(WORD1))
         self.assertTrue(self.filter.wordMatchesPattern(WORD2))
         self.assertTrue(self.filter.wordMatchesPattern(WORD3))
@@ -39,10 +39,10 @@ class WordleWordFilterTestCase(unittest.TestCase):
         entry = Entry('board', 'ggggg')
         self.filter.updatefilterPattern(entry)
 
-        self.assertFalse(self.filter.wordMatchesPattern(WORD1))
-        self.assertFalse(self.filter.wordMatchesPattern(WORD2))
-        self.assertFalse(self.filter.wordMatchesPattern(WORD3))
-        self.assertFalse(self.filter.wordMatchesPattern(WORD4))
+        self.assertTrue(self.filter.wordMatchesPattern(WORD1))
+        self.assertTrue(self.filter.wordMatchesPattern(WORD2))
+        self.assertTrue(self.filter.wordMatchesPattern(WORD3))
+        self.assertTrue(self.filter.wordMatchesPattern(WORD4))
         self.assertTrue(self.filter.wordMatchesPattern(WORD5))
 
 

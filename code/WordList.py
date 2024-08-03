@@ -1,4 +1,8 @@
 import re
+
+from code import WordChecker
+
+
 class WordList:
     def __init__(self, data):
         if isinstance(data, list):
@@ -9,8 +13,9 @@ class WordList:
 
             for line in file:
                 word = line.strip('\n')
-                if re.match("[a-z]{5}", word):
-                    self.wordList.append(word)
+                goodWord, checkedWord, error = WordChecker.validate(word)
+                if goodWord:
+                    self.wordList.append(checkedWord)
                 else:
                     print(f'{word} is invalid as all words must be five alphabetic letter.  Ignored from {data}')
         else:

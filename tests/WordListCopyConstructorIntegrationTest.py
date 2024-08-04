@@ -13,38 +13,30 @@ WORD5 = "board"
 BADWORD = "badword"
 
 
-class WordListIntegrationTest(unittest.TestCase):
+class WordListCopyConstructorIntegrationTest(unittest.TestCase):
 
     def setUp(self):
         simpleList = [WORD1, WORD2, WORD3, WORD4, WORD5, BADWORD]
         self.wordList = WordList(simpleList)
+        self.otherWordList = WordList(self.wordList)
 
     def test_initialState(self):
         self.assertEqual(5, len(self.wordList.wordList))
+        self.assertEqual(5, len(self.otherWordList.wordList))
 
-    def test_addMultipleWordFiltersRaisesException(self):
-        wordFilter = WordleWordFilter()
-        wordFilter2 = YLetterWordFilter()
-        self.wordList.addWordFilter(wordFilter2)
-        with self.assertRaises(Exception) as context:
-            self.wordList.addWordFilter(wordFilter)
-
-        self.assertTrue('WordFilter already assigned to WordList' in str(context.exception))
 
     def test_filterEntry(self):
         wordFilter = WordleWordFilter()
+        yWordFilter = YLetterWordFilter()
         self.wordList.addWordFilter(wordFilter)
+        self.otherWordList.addWordFilter(yWordFilter)
         entry = Entry('abcde', 'yyxyx')
         self.wordList.filterList(entry)
         self.assertEqual(2, len(self.wordList.wordList))
-
-    def test_filterListWithoutFilterRaisesException(self):
-        entry = Entry('abcde', 'yyxyx')
-
-        with self.assertRaises(Exception) as context:
-            self.wordList.filterList(entry)
-
-        self.assertTrue('WordFilter has not been assigned to WordList' in str(context.exception))
+        self.assertEqual(5, len(self.otherWordList.wordList))
+        self.otherWordList.filterList(entry)
+        self.assertEqual(2, len(self.wordList.wordList))
+        self.assertEqual(2, len(self.otherWordList.wordList))
 
 
 if __name__ == '__main__':

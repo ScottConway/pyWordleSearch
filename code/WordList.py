@@ -1,8 +1,8 @@
-import re
+import copy
 
-from code.WordChecker import WordChecker
-from code.RegxWordFilter import RegxWordFilter
 from code.Entry import Entry
+from code.RegxWordFilter import RegxWordFilter
+from code.WordChecker import WordChecker
 
 
 class WordList:
@@ -28,6 +28,8 @@ class WordList:
                     self.wordList.append(checkedWord)
                 else:
                     print(f'{word} is invalid as all words must be five alphabetic letter.  Ignored from {data}')
+        elif isinstance(data, WordList):
+            self.wordList = copy.deepcopy(data.wordList)
         else:
             raise ValueError(f"Data type {type(data)} not supported - only list and str allowed")
 
@@ -42,7 +44,3 @@ class WordList:
             raise Exception('WordFilter has not been assigned to WordList')
         self.wordFilter.updatefilterPattern(entry)
         self.wordList = [word for word in self.wordList if self.wordFilter.wordMatchesPattern(word)]
-
-
-
-

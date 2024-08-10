@@ -10,6 +10,7 @@ class WordList:
     def __init__(self, data):
         self.wordList = list()
         self.wordFilter = None
+        self.wordWeigher = None
         if isinstance(data, list):
             for line in data:
                 word = line.strip('\n')
@@ -31,7 +32,7 @@ class WordList:
         elif isinstance(data, WordList):
             self.wordList = copy.deepcopy(data.wordList)
         else:
-            raise ValueError(f"Data type {type(data)} not supported - only list and str allowed")
+            raise ValueError(f"Data type {type(data)} not supported - only list, str, and WordList allowed")
 
     def addWordFilter(self, wordFilter: RegxWordFilter):
         if self.wordFilter is None:
@@ -44,3 +45,8 @@ class WordList:
             raise Exception('WordFilter has not been assigned to WordList')
         self.wordFilter.updatefilterPattern(entry)
         self.wordList = [word for word in self.wordList if self.wordFilter.wordMatchesPattern(word)]
+
+    def printTopWords(self):
+        if self.wordWeigher is not None:
+            self.wordList.sort(key=self.wordWeigher.determineWeight, reverse=True)
+        print(self.wordList[0:25])

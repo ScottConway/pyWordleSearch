@@ -36,6 +36,22 @@ class EntryListTest(unittest.TestCase):
 
         self.assertTrue(f'{self.entry1.word} already used.' in str(context.exception))
 
+    def test_validateEntryIfSameWord(self):
+        entryList = EntryList()
+        entryList.add(self.entry1)
+        valid, errorMessage = entryList.validateEntry(self.entry1)
+        self.assertFalse(valid)
+        self.assertEqual('Word already used.', errorMessage)
+
+    def test_validateIfTooManyMustHaveLetters(self):
+        firstFiveLetters = Entry('abcde', 'yyyyy')
+        nextFiveLetters = Entry('fghij', 'yyyyy')
+        entryList = EntryList()
+        entryList.add(firstFiveLetters)
+        valid, errorMessage = entryList.validateEntry(nextFiveLetters)
+        self.assertFalse(valid)
+        self.assertEqual('Too many must have letters.', errorMessage)
+
     def test_exceptionIfTooManyMustHaveLetters(self):
         firstFiveLetters = Entry('abcde', 'yyyyy')
         nextFiveLetters = Entry('fghij', 'yyyyy')

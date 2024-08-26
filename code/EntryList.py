@@ -33,3 +33,16 @@ class EntryList:
     @classmethod
     def clear(cls):
         EntryList.mustHaveLetters.clear()
+
+    def validateEntry(self, entry: Entry) -> tuple[bool, str]:
+        if entry.word in self.entryDictionary:
+            return False, 'Word already used.'
+
+        entryMustHaveLetters = entry.mustHaveLettersSet()
+        listMustHaveLetters = self.mustHaveLetters.copy()
+
+        unionSet = listMustHaveLetters | entryMustHaveLetters
+        if len(unionSet) > 5:
+            return False, 'Too many must have letters.'
+
+        return True, "no error"

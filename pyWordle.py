@@ -1,6 +1,7 @@
 import argparse
 
 from code.Entry import Entry
+from code.WordListDirector import WordListDirector
 from code.WordleDisplayHelper import WordleDisplayHelper
 from code.EntryList import EntryList
 
@@ -8,6 +9,7 @@ def main():
     parser = argparse.ArgumentParser(
         description='Helper program for wordle game.')
     parser.add_argument('--version', action='version', version='%(prog)s 3.0.0-alpha1')
+    director = WordListDirector()
 
     entryList = EntryList()
 
@@ -43,6 +45,7 @@ def main():
         isValid, errorMessage = entryList.validateEntry(entry)
         if isValid:
             entryList.add(entry)
+            director.applyEntry(entry)
         else:
             if errorMessage == 'Word already used.':
                 WordleDisplayHelper.printWordAlreadyUsed(entry, entryList)

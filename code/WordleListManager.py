@@ -26,15 +26,37 @@ def createUntriedLetterFilterWordlist(wordList:WordList) -> WordList:
     return filteredWordList
 
 
+def reportList(wordleList:WordList, header:str):
+    if len(wordleList.wordList) == 0:
+        return
+
+    print(f'\t - \t - \t {header}: {wordleList.wordList[0:10]}')
+
+
 class WordleListManager:
     def __init__(self, wordList:WordList, managerName:str):
         self.managerName = managerName
         self.listOfLists = []
-        self.listOfLists.append(createWordleFilterWordlist(wordList))
-        self.listOfLists.append(createYLetterFilterWordlist(wordList))
-        self.listOfLists.append(createUntriedLetterFilterWordlist(wordList))
+
+        self.wordleList = createWordleFilterWordlist(wordList)
+        self.listOfLists.append(self.wordleList)
+        self.yLetterList = createYLetterFilterWordlist(wordList)
+        self.listOfLists.append(self.yLetterList)
+        self.untriedLetterList = createUntriedLetterFilterWordlist(wordList)
+        self.listOfLists.append(self.untriedLetterList)
 
     def applyEntry(self, entry:Entry):
         for wordList in self.listOfLists:
             wordList.filterList(entry)
 
+    def printReport(self):
+
+        totalWords = len(self.wordleList.wordList) + len(self.untriedLetterList.wordList) + len(self.yLetterList.wordList)
+        if totalWords == 0:
+            return
+
+        print(f'\t - \t {self.managerName}')
+        reportList(self.wordleList, 'Wordle words')
+        reportList(self.yLetterList, 'Y Letter words')
+        reportList(self.untriedLetterList, 'Untried Letter words')
+        print()

@@ -46,6 +46,7 @@ def main():
         if isValid:
             entryList.add(entry)
             director.applyEntry(entry)
+            director.printReport()
         else:
             if errorMessage == 'Word already used.':
                 WordleDisplayHelper.printWordAlreadyUsed(entry, entryList)

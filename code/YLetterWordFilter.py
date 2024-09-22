@@ -23,3 +23,6 @@ class YLetterWordFilter(RegxWordFilter):
             self.mustHaveCharacters.add(wordLetter)
 
         return self.filterPattern
+
+    def getFilterName(self) -> str:
+        return 'YLetterWordFilter'

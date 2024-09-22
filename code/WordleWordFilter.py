@@ -1,5 +1,5 @@
-from code.RegxWordFilter import RegxWordFilter
 from code.Entry import Entry
+from code.RegxWordFilter import RegxWordFilter
 
 
 class WordleWordFilter(RegxWordFilter):
@@ -27,3 +27,6 @@ class WordleWordFilter(RegxWordFilter):
             self.mustHaveCharacters.add(wordLetter)
 
         return self.filterPattern
+
+    def getFilterName(self) -> str:
+        return 'WordleWordFilter'

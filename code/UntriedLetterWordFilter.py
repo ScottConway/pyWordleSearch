@@ -1,5 +1,5 @@
-from code.RegxWordFilter import RegxWordFilter
 from code.Entry import Entry
+from code.RegxWordFilter import RegxWordFilter
 
 
 class UntriedLetterWordFilter(RegxWordFilter):
@@ -15,3 +15,6 @@ class UntriedLetterWordFilter(RegxWordFilter):
 
     def removeCharacterFromPattern(self, pattern, wordCharacter, patternCharacter):
         return pattern.replace(wordCharacter, "")
+
+    def getFilterName(self) -> str:
+        return "UntriedLetterWordFilter"

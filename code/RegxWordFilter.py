@@ -1,5 +1,6 @@
 import re
 from abc import ABC, abstractmethod
+
 from code.Entry import Entry
 
 
@@ -30,6 +31,10 @@ class RegxWordFilter(ABC):
 
     @abstractmethod
     def updateSinglePattern(self, index, entry):
+        pass
+
+    @abstractmethod
+    def getFilterName(self) -> str:
         pass
 
     def removeCharacterFromPattern(self, pattern, wordCharacter, patternCharacter):

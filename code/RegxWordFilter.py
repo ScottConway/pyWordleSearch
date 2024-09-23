@@ -19,8 +19,18 @@ class RegxWordFilter(ABC):
 
         return patternString
 
+    def hasRequiredCharacters(self, word):
+        if len(self.mustHaveCharacters) == 0:
+            return True
+
+        for letter in self.mustHaveCharacters:
+            if word.find(letter) == -1:
+                return False
+
+        return True
+
     def wordMatchesPattern(self, word):
-        return re.match(self.buildPattern(self.filterPattern), word)
+        return re.match(self.buildPattern(self.filterPattern), word) and self.hasRequiredCharacters(word)
 
     def updatefilterPattern(self, entry):
         for i in range(5):

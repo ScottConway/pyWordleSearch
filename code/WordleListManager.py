@@ -56,7 +56,7 @@ class WordleListManager:
             return
 
         print(f'\t - \t {self.managerName}')
-        reportList(self.wordleList, 'Wordle words')
+        reportList(self.wordleList, 'Matched words')
         reportList(self.yLetterList, 'Y Letter words')
         reportList(self.untriedLetterList, 'Untried Letter words')
         print()

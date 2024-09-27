@@ -8,7 +8,7 @@ from code.EntryList import EntryList
 def main():
     parser = argparse.ArgumentParser(
         description='Helper program for wordle game.')
-    parser.add_argument('--version', action='version', version='%(prog)s 3.0.0-alpha1')
+    parser.add_argument('--version', action='version', version='%(prog)s 3.0.0')
     director = WordListDirector()
 
     entryList = EntryList()

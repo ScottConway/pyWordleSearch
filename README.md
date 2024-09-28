@@ -11,7 +11,7 @@ python script to help me out in wordle.
 ### Low hanging fruit
 
 - [x] Add a redisplay command to redisplay hints
-- [ ] Display untried weighted words at start
+- [x] Display untried weighted words at start
 - [ ] Add a YLetterWordWeigher that gives additional weight to Y letters.
 - [ ] Add a UntriedLetterWordWeigher that gives additional weight to untried letters
 - [ ] Add a restart command to start over after finishing, or after a mistake, instead of quiting the app and starting over from the command line.

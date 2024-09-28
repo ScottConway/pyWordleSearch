@@ -109,7 +109,5 @@ The idea is to type in a five letter word then type in the result returned from 
 >
 >Word entered in wordle: quit
 
-## Changes in version 3.0.0
 
-Initial rewrite. 
 

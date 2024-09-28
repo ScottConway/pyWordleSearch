@@ -10,7 +10,7 @@ python script to help me out in wordle.
 
 ### Low hanging fruit
 
-- [ ] Add a redisplay command to redisplay hints
+- [x] Add a redisplay command to redisplay hints
 - [ ] Display untried weighted words at start
 - [ ] Add a YLetterWordWeigher that gives additional weight to Y letters.
 - [ ] Add a UntriedLetterWordWeigher that gives additional weight to untried letters
@@ -19,8 +19,14 @@ python script to help me out in wordle.
 - [ ] Add a must have characters map to supplement the set that counts and ensures the correct number of letters for faster filtering
 - [ ] Add a streamlit UI 
 
+## Changes in version 3.0.1
+
+- Add a redisplay command to redisplay hints
+- Wired in WordWeigher to sort all lists by wordle weights
+- display initial hints at start
+
 ## Changes in version 3.0.0
 
-Initial rewrite. 
+- Initial rewrite. 
 
 **Older versions are in original pyWordleSearch readme**

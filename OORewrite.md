@@ -9,9 +9,8 @@ The idea is to type in a five letter word then type in the result returned from 
 
 >python3 pyWordle.py
 >
->Enter the word, or word-pattern, or help for other commands
->
->Word entered in wordle: atone-yxxxy
+>Enter the word, or word-pattern, or help for other commands  
+>Word entered in wordle: atone-yxxxy   
 > 
 	 - 	 Wordle Words
 	 - 	 - 	 Matched words: ['gavel', 'dewar', 'fakey', 'hayed', 'herma', 'fazes', 'bares', 'sepad', 'gapes', 'wakes']
@@ -28,8 +27,7 @@ The idea is to type in a five letter word then type in the result returned from 
 	 - 	 - 	 Y Letter words: ['baaed', 'babel', 'babes', 'bagel', 'bayed', 'baked', 'baker', 'bakes', 'baled', 'balei']
 	 - 	 - 	 Untried Letter words: ['bhili', 'bibby', 'bibbs', 'bichy', 'biddy', 'bidri', 'bidry', 'biffy', 'biffs', 'bifid']
 >
->Enter the word, or word-pattern, or help for other commands
->
+>Enter the word, or word-pattern, or help for other commands  
 > Word entered in wordle: cares-xyxyx
 > 
 	 - 	 Wordle Words
@@ -48,8 +46,7 @@ The idea is to type in a five letter word then type in the result returned from 
 	 - 	 - 	 Untried Letter words: ['bhili', 'bibby', 'biddy', 'biffy', 'bifid', 'biggy', 'bigly', 'bilbi', 'bilby', 'bilgy']
 
 >
->Enter the word, or word-pattern, or help for other commands
-> 
+>Enter the word, or word-pattern, or help for other commands  
 >Word entered in wordle: pedal-xgxyx
 > 
 	 - 	 Wordle Words
@@ -67,8 +64,7 @@ The idea is to type in a five letter word then type in the result returned from 
 	 - 	 - 	 Untried Letter words: ['bibby', 'biffy', 'biggy', 'bivvy', 'bubby', 'buffi', 'buffy', 'buggy', 'buzzy', 'figgy']
 
 >
->Enter the word, or word-pattern, or help for other commands
->
+>Enter the word, or word-pattern, or help for other commands  
 >Word entered in wordle: heavy-ggggg
 > 
 	 - 	 Wordle Words
@@ -89,15 +85,15 @@ The idea is to type in a five letter word then type in the result returned from 
 >
 > Word entered in wordle: help
 >
->help: prints this help message
->history: display past entries.
->quit or exit: quit the program
+>help: prints this help message  
+>history: display past entries.  
+>quit or exit: quit the program  
 >
 >Press enter to continue
 >
 >Enter the word, or word-pattern, or help for other commands
 >
->Word entered in wordle: history
+>Word entered in wordle: history  
 >Past Entries:
 > 
 >0: atone  -  yxxxy  

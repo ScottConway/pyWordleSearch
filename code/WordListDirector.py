@@ -9,8 +9,8 @@ class WordListDirector:
         self.wordleList = WordList('wordleWords.txt')
         self.fullList = WordList('fiveLetterWords.txt')
         self.managerList = []
-        self.managerList.append(WordleListManager(self.wordleList, 'Wordle Words'))
         self.managerList.append(WordleListManager(self.commonList, 'Common Five Letter Words'))
+        self.managerList.append(WordleListManager(self.wordleList, 'Wordle Words'))
         self.managerList.append(WordleListManager(self.fullList, 'Full List Five Letter Words'))
 
     def applyEntry(self, entry:Entry):
@@ -20,3 +20,7 @@ class WordListDirector:
     def printReport(self):
         for manager in self.managerList:
             manager.printReport()
+
+    def printInitialReport(self):
+        for manager in self.managerList:
+            manager.printInitialReport()

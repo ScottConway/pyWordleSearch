@@ -5,15 +5,18 @@ from code.WordListDirector import WordListDirector
 from code.WordleDisplayHelper import WordleDisplayHelper
 from code.EntryList import EntryList
 
+
 def main():
     parser = argparse.ArgumentParser(
         description='Helper program for wordle game.')
-    parser.add_argument('--version', action='version', version='%(prog)s 3.0.0')
+    parser.add_argument('--version', action='version', version='%(prog)s 3.0.1')
     director = WordListDirector()
 
     entryList = EntryList()
-
     finished = False
+
+    director.printInitialReport()
+
     while not finished:
         WordleDisplayHelper.firstPrompt()
 
@@ -27,6 +30,9 @@ def main():
             WordleDisplayHelper.printEntryList(entryList)
             print()
             continue
+        elif testWord.lower() == 'redisplay':
+            director.printReport()
+            continue
         elif testWord.lower() == 'quit' or testWord.lower() == 'exit':
             finished = True
             continue
@@ -37,8 +43,8 @@ def main():
 
         if not splitWord:
             result = input(
-                    "Enter result from wordle x - no match, y - match wrong position, g - correct letter in correct "
-                    "position: ")
+                "Enter result from wordle x - no match, y - match wrong position, g - correct letter in correct "
+                "position: ")
 
         entry = Entry(testWord, result)
 

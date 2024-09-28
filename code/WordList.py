@@ -3,6 +3,7 @@ import copy
 from code.Entry import Entry
 from code.RegxWordFilter import RegxWordFilter
 from code.WordChecker import WordChecker
+from code.WordWeigher import WordWeigher
 
 
 class WordList:
@@ -40,13 +41,22 @@ class WordList:
         else:
             raise Exception('WordFilter already assigned to WordList')
 
+    def addWordWeigher(self, wordWeigher: WordWeigher):
+        if self.wordWeigher is None:
+            self.wordWeigher = wordWeigher
+        else:
+            raise Exception('WordWeigher already assigned to WordList')
+
     def filterList(self, entry: Entry):
         if self.wordFilter is None:
             raise Exception('WordFilter has not been assigned to WordList')
         self.wordFilter.updatefilterPattern(entry)
         self.wordList = [word for word in self.wordList if self.wordFilter.wordMatchesPattern(word)]
 
-    def printTopWords(self):
+    def sortWords(self):
         if self.wordWeigher is not None:
             self.wordList.sort(key=self.wordWeigher.determineWeight, reverse=True)
+
+    def printTopWords(self):
+        self.sortWords()
         print(self.wordList[0:25])

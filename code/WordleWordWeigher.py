@@ -13,7 +13,7 @@ class WordleWordWeigher(WordWeigher):
         for letter in word:
             uniqueLetters.add(letter)
 
-        wordSum += (1000 * len(uniqueLetters))
+        wordSum += (4000 * len(uniqueLetters))
 
         return wordSum
 

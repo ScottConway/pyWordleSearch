@@ -4,6 +4,7 @@ entryListInstance = None
 
 class EntryList:
     mustHaveLetters = set()
+    gLetters = set()
 
     def __init__(self):
         self.entries = []
@@ -15,6 +16,8 @@ class EntryList:
             patternLetter = entry.pattern[i]
             if patternLetter == 'y' or patternLetter == 'g':
                 self.mustHaveLetters.add(wordLetter)
+                if patternLetter == 'g':
+                    self.gLetters.add(wordLetter)
 
     def add(self, entry: Entry):
         if entry.word in self.entryDictionary:
@@ -30,6 +33,10 @@ class EntryList:
     @staticmethod
     def mustHaveLetterSet():
         return EntryList.mustHaveLetters.copy()
+
+    @staticmethod
+    def yLetterSet():
+        return EntryList.mustHaveLetters.difference(EntryList.gLetters)
 
     @classmethod
     def clear(cls):

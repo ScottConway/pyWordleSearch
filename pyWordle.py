@@ -1,4 +1,5 @@
 import argparse
+import code.EntryList
 
 from code.Entry import Entry
 from code.WordListDirector import WordListDirector
@@ -12,7 +13,9 @@ def main():
     parser.add_argument('--version', action='version', version='%(prog)s 3.0.1')
     director = WordListDirector()
 
-    entryList = EntryList()
+    if code.EntryList.entryListInstance is None:
+        code.EntryList.entryListInstance = EntryList()
+
     finished = False
 
     director.printInitialReport()
@@ -27,7 +30,7 @@ def main():
             WordleDisplayHelper.printHelp()
             continue
         elif testWord.lower() == 'history':
-            WordleDisplayHelper.printEntryList(entryList)
+            WordleDisplayHelper.printEntryList(code.EntryList.entryListInstance)
             print()
             continue
         elif testWord.lower() == 'redisplay':
@@ -48,18 +51,18 @@ def main():
 
         entry = Entry(testWord, result)
 
-        isValid, errorMessage = entryList.validateEntry(entry)
+        isValid, errorMessage = code.EntryList.entryListInstance.validateEntry(entry)
         if isValid:
-            entryList.add(entry)
+            code.EntryList.entryListInstance.add(entry)
             director.applyEntry(entry)
             director.printReport()
         else:
             if errorMessage == 'Word already used.':
-                WordleDisplayHelper.printWordAlreadyUsed(entry, entryList)
+                WordleDisplayHelper.printWordAlreadyUsed(entry, code.EntryList.entryListInstance)
             elif errorMessage == 'Too many must have letters.':
-                WordleDisplayHelper.printTooManyMustHaveLetters(entryList)
+                WordleDisplayHelper.printTooManyMustHaveLetters(code.EntryList.entryListInstance)
             else:
-                WordleDisplayHelper.printUnhandledError(errorMessage, entry, entryList)
+                WordleDisplayHelper.printUnhandledError(errorMessage, entry, code.EntryList.entryListInstance)
 
             continue
 

@@ -4,6 +4,7 @@ from code.WordList import WordList
 from code.WordleWordFilter import WordleWordFilter
 from code.WordleWordWeigher import WordleWordWeigher
 from code.YLetterWordFilter import YLetterWordFilter
+from code.YLetterWordWeigher import YLetterWordWeigher
 
 
 def createWordleFilterWordlist(wordList:WordList) -> WordList:
@@ -19,7 +20,7 @@ def createYLetterFilterWordlist(wordList:WordList) -> WordList:
     filteredWordList = WordList(wordList)
     wordFilter = YLetterWordFilter()
     filteredWordList.addWordFilter(wordFilter)
-    weigher = WordleWordWeigher()
+    weigher = YLetterWordWeigher()
     filteredWordList.addWordWeigher(weigher)
     return filteredWordList
 

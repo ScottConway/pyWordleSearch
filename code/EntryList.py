@@ -1,5 +1,6 @@
 from code.Entry import Entry
 
+entryListInstance = None
 
 class EntryList:
     mustHaveLetters = set()

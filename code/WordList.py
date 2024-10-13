@@ -56,7 +56,3 @@ class WordList:
     def sortWords(self):
         if self.wordWeigher is not None:
             self.wordList.sort(key=self.wordWeigher.determineWeight, reverse=True)
-
-    def printTopWords(self):
-        self.sortWords()
-        print(self.wordList[0:25])

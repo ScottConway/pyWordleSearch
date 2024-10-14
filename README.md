@@ -13,7 +13,7 @@ python script to help me out in wordle.
 - [x] Add a redisplay command to redisplay hints
 - [x] Display untried weighted words at start
 - [x] Add a YLetterWordWeigher that gives additional weight to Y letters.
-- [ ] Add a UntriedLetterWordWeigher that gives additional weight to untried letters
+- [x] Add a UntriedLetterWordWeigher that gives additional weight to untried letters
 - [ ] Add a restart command to start over after finishing, or after a mistake, instead of quiting the app and starting over from the command line.
 ### Stretch/Long term goals
 - [ ] Add a must-have characters map to supplement the set that counts and ensures the correct number of letters for faster filtering

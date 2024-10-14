@@ -1,5 +1,6 @@
 from code.Entry import Entry
 from code.UntriedLetterWordFilter import UntriedLetterWordFilter
+from code.UntriedLetterWordWeigher import UntriedLetterWordWeigher
 from code.WordList import WordList
 from code.WordleWordFilter import WordleWordFilter
 from code.WordleWordWeigher import WordleWordWeigher
@@ -29,7 +30,7 @@ def createUntriedLetterFilterWordlist(wordList:WordList) -> WordList:
     filteredWordList = WordList(wordList)
     wordFilter = UntriedLetterWordFilter()
     filteredWordList.addWordFilter(wordFilter)
-    weigher = WordleWordWeigher()
+    weigher = UntriedLetterWordWeigher()
     filteredWordList.addWordWeigher(weigher)
     return filteredWordList
 

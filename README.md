@@ -21,7 +21,8 @@ python script to help me out in wordle.
 
 ## Changes in version 3.0.2
 
-- Added the YLetterWordWeigher to give more weight to words with more Y letters. 
+- Added the YLetterWordWeigher to give more weight to words with more Y letters.
+- Added the UntriedLetterWordWeigher to give more weight to words with untried letters.
 
 ## Changes in version 3.0.1
 

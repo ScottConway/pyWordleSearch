@@ -18,7 +18,6 @@ class WordleDisplayHelper:
         print("redisplay: redisplay last set of hints")
         print("quit or exit: quit the program")
         print()
-        input("Press enter to continue")
 
     @staticmethod
     def printWordAlreadyUsed(entry:Entry, entryList:EntryList):

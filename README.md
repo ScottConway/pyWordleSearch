@@ -10,12 +10,10 @@ python script to help me out in wordle.
 
 ### Low-hanging fruit
 
-- [x] Add a redisplay command to redisplay hints
-- [x] Display untried weighted words at start
-- [x] Add a YLetterWordWeigher that gives additional weight to Y letters.
-- [x] Add a UntriedLetterWordWeigher that gives additional weight to untried letters
 - [ ] Add a restart command to start over after finishing, or after a mistake, instead of quiting the app and starting over from the command line.
+
 ### Stretch/Long term goals
+
 - [ ] Add a must-have characters map to supplement the set that counts and ensures the correct number of letters for faster filtering
 - [ ] Add a streamlit UI 
 
@@ -23,6 +21,7 @@ python script to help me out in wordle.
 
 - Added the YLetterWordWeigher to give more weight to words with more Y letters.
 - Added the UntriedLetterWordWeigher to give more weight to words with untried letters.
+- Removed the "Press enter to continue" input from non error messages. 
 
 ## Changes in version 3.0.1
 

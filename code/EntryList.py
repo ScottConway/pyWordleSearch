@@ -11,6 +11,13 @@ class EntryList:
         self.entries = []
         self.entryDictionary = {}
 
+    def reset(self):
+        self.entries = []
+        self.entryDictionary = {}
+        mustHaveLetters = set()
+        gLetters = set()
+        triedLetters = set()
+
     def updateMustHaveLetters(self, entry: Entry):
         for i in range(5):
             wordLetter = entry.word[i]

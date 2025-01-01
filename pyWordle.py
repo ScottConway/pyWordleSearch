@@ -10,7 +10,7 @@ from code.EntryList import EntryList
 def main():
     parser = argparse.ArgumentParser(
         description='Helper program for wordle game.')
-    parser.add_argument('--version', action='version', version='%(prog)s 3.0.2')
+    parser.add_argument('--version', action='version', version='%(prog)s 3.0.3')
     director = WordListDirector()
 
     if code.EntryList.entryListInstance is None:
@@ -28,6 +28,12 @@ def main():
         result = ""
         if testWord.lower() == 'help':
             WordleDisplayHelper.printHelp()
+            director.printInitialReport()
+            continue
+        elif testWord.lower() == 'restart':
+            director = WordListDirector()
+            code.EntryList.entryListInstance.reset()
+            director.printInitialReport()
             continue
         elif testWord.lower() == 'history':
             WordleDisplayHelper.printEntryList(code.EntryList.entryListInstance)

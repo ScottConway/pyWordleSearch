@@ -16,6 +16,7 @@ class WordleDisplayHelper:
         print("help: prints this help message")
         print("history: display past entries")
         print("redisplay: redisplay last set of hints")
+        print("restart: clear history and start over")
         print("quit or exit: quit the program")
         print()
 

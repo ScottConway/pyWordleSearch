@@ -10,12 +10,16 @@ python script to help me out in wordle.
 
 ### Low-hanging fruit
 
-- [ ] Add a restart command to start over after finishing, or after a mistake, instead of quiting the app and starting over from the command line.
+- [x] Add a restart command to start over after finishing, or after a mistake, instead of quiting the app and starting over from the command line.
 
 ### Stretch/Long term goals
 
 - [ ] Add a must-have characters map to supplement the set that counts and ensures the correct number of letters for faster filtering
 - [ ] Add a streamlit UI 
+
+## Changes in version 3.0.3
+
+- Added restart command. 
 
 ## Changes in version 3.0.2
 

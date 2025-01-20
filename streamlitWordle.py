@@ -14,7 +14,11 @@ def main():
     parser = argparse.ArgumentParser(
         description='Helper program for wordle game.')
     parser.add_argument('--version', action='version', version='%(prog)s 3.0.3')
-    director = WordListDirector()
+
+    if "director" not in st.session_state:
+        st.session_state["director"] = WordListDirector()
+
+    director = st.session_state["director"]
 
     if code.EntryList.entryListInstance is None:
         code.EntryList.entryListInstance = EntryList()

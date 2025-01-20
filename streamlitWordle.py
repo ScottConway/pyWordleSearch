@@ -34,7 +34,12 @@ def main():
         if isValid:
             code.EntryList.entryListInstance.add(entry)
             director.applyEntry(entry)
-            print(code.EntryList.entryListInstance.entries)
+            entryListValues = [f"{x.word} - {x.pattern}" for x in code.EntryList.entryListInstance.entries]
+            st.write("Entries")
+            st.write(entryListValues)
+            st.write("Report")
+            st.write(director.reportString())
+
         else:
             if errorMessage == 'Word already used.':
                 WordleDisplayHelper.printWordAlreadyUsed(entry, code.EntryList.entryListInstance)
@@ -42,7 +47,9 @@ def main():
                 WordleDisplayHelper.printTooManyMustHaveLetters(code.EntryList.entryListInstance)
             else:
                 WordleDisplayHelper.printUnhandledError(errorMessage, entry, code.EntryList.entryListInstance)
-
+    else:
+        st.write("Report")
+        st.write(director.initialReportString())
 
 
 

@@ -38,9 +38,15 @@ def createUntriedLetterFilterWordlist(wordList:WordList) -> WordList:
 def reportList(wordleList:WordList, header:str):
     if len(wordleList.wordList) == 0:
         return
-    wordleList.sortWords()
+
     print(f'\t - \t - \t {header}: {wordleList.wordList[0:10]}')
 
+def reportListString(wordleList:WordList, header:str) -> str:
+    if len(wordleList.wordList) == 0:
+        return ""
+    wordleList.sortWords()
+    returnString = f'{header}: {wordleList.wordList[0:10]}'
+    return returnString
 
 class WordleListManager:
     def __init__(self, wordList:WordList, managerName:str):
@@ -70,6 +76,23 @@ class WordleListManager:
         reportList(self.untriedLetterList, 'Untried Letter words')
         print()
 
+    def reportListString(self) -> str:
+        totalWords = len(self.wordleList.wordList) + len(self.untriedLetterList.wordList) + len(
+            self.yLetterList.wordList)
+        if totalWords == 0:
+            return ""
+
+        returnString = f"{self.managerName}\n\n"
+
+        returnString += reportListString(self.wordleList, 'Matched words')
+        returnString += "\n\n"
+        returnString += reportListString(self.yLetterList, 'Y Letter words')
+        returnString += "\n\n"
+        returnString += reportListString(self.untriedLetterList, 'Untried Letter words')
+        returnString += "\n\n"
+
+        return returnString
+
     def printInitialReport(self):
 
         totalWords = len(self.untriedLetterList.wordList)
@@ -79,3 +102,13 @@ class WordleListManager:
         print(f'\t - \t {self.managerName}')
         reportList(self.untriedLetterList, 'Untried Letter words')
         print()
+
+    def initialReportString(self) -> str:
+        totalWords = len(self.untriedLetterList.wordList)
+        if totalWords == 0:
+            return ""
+
+        returnString = f'{self.managerName}\n\n'
+        returnString += reportListString(self.untriedLetterList, 'Untried Letter words')
+        returnString += "\n\n"
+        return returnString

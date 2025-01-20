@@ -21,6 +21,19 @@ class WordListDirector:
         for manager in self.managerList:
             manager.printReport()
 
+    def reportString(self) -> str:
+        report = ''
+        for manager in self.managerList:
+            report += manager.reportListString()
+
+        return report
+
     def printInitialReport(self):
         for manager in self.managerList:
             manager.printInitialReport()
+
+    def initialReportString(self) -> str:
+        report = ''
+        for manager in self.managerList:
+            report += manager.initialReportString()
+        return report

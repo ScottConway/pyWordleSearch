@@ -3,11 +3,10 @@ import argparse
 import streamlit as st
 
 import code.EntryList
-
 from code.Entry import Entry
+from code.EntryList import EntryList
 from code.WordListDirector import WordListDirector
 from code.WordleDisplayHelper import WordleDisplayHelper
-from code.EntryList import EntryList
 
 
 def main():
@@ -27,7 +26,7 @@ def main():
 
     st.write("Input word and pattern ie atone-xxyyg")
     testWord = st.text_input(label='Input word and pattern ie atone-xxyyg', key='inputResult', max_chars=11,
-                           help='Input word and pattern ie atone-xxyyg')
+                             help='Input word and pattern ie atone-xxyyg')
 
     if testWord:
         result = testWord[-5:]
@@ -54,8 +53,6 @@ def main():
     else:
         st.write("Report")
         st.write(director.initialReportString())
-
-
 
 
 if __name__ == '__main__':

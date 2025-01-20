@@ -15,7 +15,11 @@ python script to help me out in wordle.
 ### Stretch/Long term goals
 
 - [ ] Add a must-have characters map to supplement the set that counts and ensures the correct number of letters for faster filtering
-- [ ] Add a streamlit UI 
+- [x] Add a streamlit UI 
+
+## Changes in version 3.1.0
+
+- Added streamlit UI!!  Not as flashy as I had initially envisioned but fully functional.  Will look at improvements in later releases.
 
 ## Changes in version 3.0.3
 

@@ -11,12 +11,15 @@ class EntryList:
         self.entries = []
         self.entryDictionary = {}
 
+    def hasEntries(self) -> bool:
+        return len(self.entries) > 0
+
     def reset(self):
         self.entries = []
         self.entryDictionary = {}
-        mustHaveLetters = set()
-        gLetters = set()
-        triedLetters = set()
+        self.mustHaveLetters = set()
+        self.gLetters = set()
+        self.triedLetters = set()
 
     def updateMustHaveLetters(self, entry: Entry):
         for i in range(5):

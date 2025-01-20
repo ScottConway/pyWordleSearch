@@ -21,6 +21,14 @@ class WordleDisplayHelper:
         print()
 
     @staticmethod
+    def helpMessage() -> str:
+        helpString = """\n\n
+        help: prints this help message.\n\n
+        restart: clear history and start over.
+        """
+        return helpString
+
+    @staticmethod
     def printWordAlreadyUsed(entry:Entry, entryList:EntryList):
         print()
         print(f'{entry.word} is already used')
@@ -28,6 +36,11 @@ class WordleDisplayHelper:
         WordleDisplayHelper.printEntryList(entryList)
         print()
         input("Press enter to continue")
+
+    @staticmethod
+    def wordAleadyUsedMessage(entry:Entry, entryList:EntryList) -> str:
+        returnString = f'{entry.word} is already used\n\n'
+        return returnString
 
     @staticmethod
     def printEntryList(entryList:EntryList):
@@ -45,9 +58,19 @@ class WordleDisplayHelper:
         input("Press enter to continue")
 
     @staticmethod
+    def unhandledErrorMessage(errorMessage:str, entry:Entry) -> str:
+        returnString = f'The entry {entry.word} failed with the following error: {errorMessage}\n\n'
+        return returnString
+
+    @staticmethod
     def printTooManyMustHaveLetters(entryList):
         print()
         print('Too many must-have letters have been identified.')
         WordleDisplayHelper.printEntryList(entryList)
         print()
         input("Press enter to continue")
+
+    @staticmethod
+    def tooManyMustHaveLettersMessage() -> str:
+        returnString = 'Too many must-have letters have been identified.\n\n'
+        return returnString

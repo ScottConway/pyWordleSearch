@@ -26,19 +26,25 @@ def main():
     testWord = st.text_input(label='Input word and pattern ie atone-xxyyg', key='inputResult', max_chars=11,
                              help='Input word and pattern ie atone-xxyyg')
 
-    if testWord:
-        if testWord.lower() == 'help':
-            st.write(WordleDisplayHelper.helpMessage())
+    col1, col2 = st.columns(2)
 
-            if code.EntryList.entryListInstance.hasEntries():
-                entryListValues = [f"{x.word} - {x.pattern}" for x in code.EntryList.entryListInstance.entries]
-                st.header("Entries")
-                st.write(entryListValues)
-                st.header("Report")
-                st.write(director.reportString())
-            else:
-                st.header("Report")
-                st.write(director.initialReportString())
+    with col1:
+        resetPressed = st.button('Reset')
+
+    with col2:
+        helpPressed = st.button('Help')
+
+    if resetPressed:
+        director = WordListDirector()
+        st.session_state["director"] = director
+        code.EntryList.entryListInstance.reset()
+        st.header("Report")
+        st.write(director.initialReportString())
+    elif helpPressed:
+        display_help(director)
+    elif testWord:
+        if testWord.lower() == 'help':
+            display_help(director)
 
         elif testWord.lower() == 'restart':
             director = WordListDirector()
@@ -78,6 +84,19 @@ def main():
                 else:
                     st.write(WordleDisplayHelper.unhandledErrorMessage(errorMessage, entry))
 
+    else:
+        st.header("Report")
+        st.write(director.initialReportString())
+
+
+def display_help(director):
+    st.write(WordleDisplayHelper.helpMessage())
+    if code.EntryList.entryListInstance.hasEntries():
+        entryListValues = [f"{x.word} - {x.pattern}" for x in code.EntryList.entryListInstance.entries]
+        st.header("Entries")
+        st.write(entryListValues)
+        st.header("Report")
+        st.write(director.reportString())
     else:
         st.header("Report")
         st.write(director.initialReportString())

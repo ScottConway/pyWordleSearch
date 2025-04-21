@@ -71,9 +71,9 @@ class WordleListManager:
             return
 
         print(f'\t - \t {self.managerName}')
-        reportList(self.wordleList, 'Matched words')
-        reportList(self.yLetterList, 'Y Letter words')
-        reportList(self.untriedLetterList, 'Untried Letter words')
+        reportList(self.wordleList, '**Matched words**')
+        reportList(self.yLetterList, '**Y Letter words**')
+        reportList(self.untriedLetterList, '**Untried Letter words**')
         print()
 
     def reportListString(self) -> str:
@@ -84,11 +84,11 @@ class WordleListManager:
 
         returnString = f"{self.managerName}\n\n"
 
-        returnString += reportListString(self.wordleList, 'Matched words')
+        returnString += reportListString(self.wordleList, '**Matched words**')
         returnString += "\n\n"
-        returnString += reportListString(self.yLetterList, 'Y Letter words')
+        returnString += reportListString(self.yLetterList, '**Y Letter words**')
         returnString += "\n\n"
-        returnString += reportListString(self.untriedLetterList, 'Untried Letter words')
+        returnString += reportListString(self.untriedLetterList, '**Untried Letter words**')
         returnString += "\n\n"
 
         return returnString
@@ -100,7 +100,7 @@ class WordleListManager:
             return
 
         print(f'\t - \t {self.managerName}')
-        reportList(self.untriedLetterList, 'Untried Letter words')
+        reportList(self.untriedLetterList, '**Untried Letter words**')
         print()
 
     def initialReportString(self) -> str:
@@ -109,6 +109,6 @@ class WordleListManager:
             return ""
 
         returnString = f'{self.managerName}\n\n'
-        returnString += reportListString(self.untriedLetterList, 'Untried Letter words')
+        returnString += reportListString(self.untriedLetterList, '**Untried Letter words**')
         returnString += "\n\n"
         return returnString

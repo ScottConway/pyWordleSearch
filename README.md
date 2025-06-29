@@ -3,8 +3,9 @@ python script to help me out in wordle.
 
 **Table of Contents**
 
--[Original pyWordleSearch - version 2.x](OriginalPWS.md)  
--[OO Rewrite of pyWordleSearch - version 3.x](OORewrite.md)
+- [Original pyWordleSearch - version 2.x](OriginalPWS.md)  
+- [OO Rewrite of pyWordleSearch - version 3.x](OORewrite.md)
+- [Streamlit UI for OO Rewrite](StreamlitPWS.md)
 
 ## ToDo list
 

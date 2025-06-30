@@ -1,5 +1,6 @@
 import dataclasses
 
+
 class Entry:
     def __init__(self, word, pattern):
         self.word = word
@@ -17,3 +18,21 @@ class Entry:
 
         return letterSet
 
+    def mustHaveLetterCount(self) -> dict[str, int]:
+        letterCount = {}
+        numLetters = min(len(self.word), len(self.pattern))
+        for i in range(numLetters):
+            wordLetter = self.word[i]
+            if wordLetter in letterCount:
+                continue
+
+            numFound = 0
+            for j in range(i, numLetters):
+                patternLetter = self.pattern[j]
+                if self.word[j] == wordLetter and (patternLetter == 'y' or patternLetter == 'g'):
+                    numFound += 1
+
+            if numFound > 0:
+                letterCount[wordLetter] = numFound
+
+        return letterCount

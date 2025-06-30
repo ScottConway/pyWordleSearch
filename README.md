@@ -16,6 +16,7 @@ python script to help me out in wordle.
 ### Stretch/Long term goals
 
 - [ ] Add a must-have characters map to supplement the set that counts and ensures the correct number of letters for faster filtering
+- [ ] Better double letter logic for the above - see [this reddit post](https://www.reddit.com/r/wordle/comments/rypous/do_wordles_have_double_letters/).
 - [x] Add a streamlit UI 
 
 ## Changes in version 3.1.0

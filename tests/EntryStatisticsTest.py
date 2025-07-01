@@ -20,8 +20,8 @@ class MyTestCase(unittest.TestCase):
 
         wordLetters = entryStats.wordLetters
         self.assertEqual(2, len(wordLetters))
-        self.assertTrue('f' in entryStats.wordLetters)
-        self.assertTrue('y' in entryStats.wordLetters)
+        self.assertTrue('f' in wordLetters)
+        self.assertTrue('y' in wordLetters)
 
         fLetterStats:LetterStatistics = entryStats.wordLetters['f']
         self.assertFalse(fLetterStats.exactCount)
@@ -36,9 +36,9 @@ class MyTestCase(unittest.TestCase):
 
         wordLetters = entryStats.wordLetters
         self.assertEqual(3, len(wordLetters))
-        self.assertTrue('f' in entryStats.wordLetters)
-        self.assertTrue('y' in entryStats.wordLetters)
-        self.assertTrue('g' in entryStats.wordLetters)
+        self.assertTrue('f' in wordLetters)
+        self.assertTrue('y' in wordLetters)
+        self.assertTrue('g' in wordLetters)
 
         fLetterStats:LetterStatistics = entryStats.wordLetters['f']
         self.assertFalse(fLetterStats.exactCount)

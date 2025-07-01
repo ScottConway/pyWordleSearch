@@ -12,6 +12,7 @@ class EntryListStatisticsTest(unittest.TestCase):
 
     def test_initialState(self):
         self.assertEqual(0, len(self.stats.gameWordListStats))
+        self.assertEqual(0, self.stats.totalMatchedCount())
 
     def test_addEntryStatisticsAndClear(self):
         entry = Entry("foggy", "yxxxg")
@@ -22,11 +23,13 @@ class EntryListStatisticsTest(unittest.TestCase):
 
         wordLetters = self.stats.gameWordListStats
         self.assertEqual(2, len(wordLetters))
+        self.assertEqual(2, self.stats.totalMatchedCount())
         self.assertTrue('f' in wordLetters)
         self.assertTrue('y' in wordLetters)
 
         self.stats.clear()
         self.assertEqual(0, len(self.stats.gameWordListStats))
+        self.assertEqual(0, self.stats.totalMatchedCount())
 
     def test_addMultipleEntries(self):
         #for this test the main word is misty
@@ -38,6 +41,7 @@ class EntryListStatisticsTest(unittest.TestCase):
 
         wordLetters = self.stats.gameWordListStats
         self.assertEqual(1, len(wordLetters))
+        self.assertEqual(1, self.stats.totalMatchedCount())
         self.assertTrue('t' in wordLetters)
 
         entry = Entry("gifts", "xgxgy")
@@ -45,6 +49,7 @@ class EntryListStatisticsTest(unittest.TestCase):
         entryStats.buildLetterStatistics(entry)
 
         self.stats.addEntryStatistics(entryStats)
+        self.assertEqual(3, self.stats.totalMatchedCount())
 
         wordLetters = self.stats.gameWordListStats
         self.assertEqual(3, len(wordLetters))
@@ -57,6 +62,7 @@ class EntryListStatisticsTest(unittest.TestCase):
         entryStats.buildLetterStatistics(entry)
 
         self.stats.addEntryStatistics(entryStats)
+        self.assertEqual(4, self.stats.totalMatchedCount())
 
         wordLetters = self.stats.gameWordListStats
         self.assertEqual(4, len(wordLetters))
@@ -88,6 +94,7 @@ class EntryListStatisticsTest(unittest.TestCase):
         entryStats.buildLetterStatistics(entry)
 
         self.stats.addEntryStatistics(entryStats)
+        self.assertEqual(3, self.stats.totalMatchedCount())
 
         wordLetters = self.stats.gameWordListStats
         self.assertEqual(3, len(wordLetters))
@@ -112,6 +119,7 @@ class EntryListStatisticsTest(unittest.TestCase):
         entryStats.buildLetterStatistics(entry)
 
         self.stats.addEntryStatistics(entryStats)
+        self.assertEqual(4, self.stats.totalMatchedCount())
 
         wordLetters = self.stats.gameWordListStats
         self.assertEqual(3, len(wordLetters))

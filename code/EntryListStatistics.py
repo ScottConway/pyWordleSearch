@@ -27,3 +27,15 @@ class EntryListStatistics:
         entryStatistics.buildLetterStatistics(entry)
         self.addEntryStatistics(entryStatistics)
 
+    def reportString(self) -> str:
+        report = ''
+        for key in self.gameWordListStats:
+            letterStat = self.gameWordListStats[key]
+            report += key + ': ' + str(letterStat.count)
+            if letterStat.exactCount:
+                report += '*'
+            report += ' \t '
+        report += '\n'
+        return report
+
+

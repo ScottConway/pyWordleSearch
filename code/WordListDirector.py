@@ -27,6 +27,9 @@ class WordListDirector:
 
     def reportString(self) -> str:
         report = ''
+        if self.entryListStatistics.totalMatchedCount() > 0:
+            report += '**Required letter counts (\\* - exact count)** \n\n'
+            report += self.entryListStatistics.reportString()
         for manager in self.managerList:
             report += manager.reportListString()
 

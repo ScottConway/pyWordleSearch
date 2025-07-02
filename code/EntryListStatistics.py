@@ -38,4 +38,18 @@ class EntryListStatistics:
         report += '\n'
         return report
 
+    def doesWordMatchCounts(self, word:str) -> bool:
+        for key in self.gameWordListStats:
+            letterStat = self.gameWordListStats[key]
+            occurrences = word.count(key)
+            if occurrences == 0:
+                return False
+
+            if letterStat.exactCount and occurrences != letterStat.count:
+                return False
+            elif occurrences < letterStat.count:
+                return False
+
+        return True
+
 

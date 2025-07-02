@@ -1,4 +1,5 @@
 from code.Entry import Entry
+from code.EntryListStatistics import EntryListStatistics
 from code.UntriedLetterWordFilter import UntriedLetterWordFilter
 from code.UntriedLetterWordWeigher import UntriedLetterWordWeigher
 from code.WordList import WordList
@@ -8,8 +9,8 @@ from code.YLetterWordFilter import YLetterWordFilter
 from code.YLetterWordWeigher import YLetterWordWeigher
 
 
-def createWordleFilterWordlist(wordList:WordList) -> WordList:
-    filteredWordList = WordList(wordList)
+def createWordleFilterWordlist(wordList: WordList) -> WordList:
+    filteredWordList = WordList(wordList, True)
     wordFilter = WordleWordFilter()
     filteredWordList.addWordFilter(wordFilter)
     weigher = WordleWordWeigher()
@@ -17,7 +18,7 @@ def createWordleFilterWordlist(wordList:WordList) -> WordList:
     return filteredWordList
 
 
-def createYLetterFilterWordlist(wordList:WordList) -> WordList:
+def createYLetterFilterWordlist(wordList: WordList) -> WordList:
     filteredWordList = WordList(wordList)
     wordFilter = YLetterWordFilter()
     filteredWordList.addWordFilter(wordFilter)
@@ -26,7 +27,7 @@ def createYLetterFilterWordlist(wordList:WordList) -> WordList:
     return filteredWordList
 
 
-def createUntriedLetterFilterWordlist(wordList:WordList) -> WordList:
+def createUntriedLetterFilterWordlist(wordList: WordList) -> WordList:
     filteredWordList = WordList(wordList)
     wordFilter = UntriedLetterWordFilter()
     filteredWordList.addWordFilter(wordFilter)
@@ -35,21 +36,23 @@ def createUntriedLetterFilterWordlist(wordList:WordList) -> WordList:
     return filteredWordList
 
 
-def reportList(wordleList:WordList, header:str):
+def reportList(wordleList: WordList, header: str):
     if len(wordleList.wordList) == 0:
         return
 
     print(f'\t - \t - \t {header}: {wordleList.wordList[0:10]}')
 
-def reportListString(wordleList:WordList, header:str) -> str:
+
+def reportListString(wordleList: WordList, header: str) -> str:
     if len(wordleList.wordList) == 0:
         return ""
     wordleList.sortWords()
     returnString = f'{header}: {wordleList.wordList[0:10]}'
     return returnString
 
+
 class WordleListManager:
-    def __init__(self, wordList:WordList, managerName:str):
+    def __init__(self, wordList: WordList, managerName: str):
         self.managerName = managerName
         self.listOfLists = []
 
@@ -60,13 +63,14 @@ class WordleListManager:
         self.untriedLetterList = createUntriedLetterFilterWordlist(wordList)
         self.listOfLists.append(self.untriedLetterList)
 
-    def applyEntry(self, entry:Entry):
+    def applyEntry(self, entry: Entry, entryListStatistics: EntryListStatistics):
         for wordList in self.listOfLists:
-            wordList.filterList(entry)
+            wordList.filterList(entry, entryListStatistics)
 
     def printReport(self):
 
-        totalWords = len(self.wordleList.wordList) + len(self.untriedLetterList.wordList) + len(self.yLetterList.wordList)
+        totalWords = len(self.wordleList.wordList) + len(self.untriedLetterList.wordList) + len(
+            self.yLetterList.wordList)
         if totalWords == 0:
             return
 

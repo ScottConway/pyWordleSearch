@@ -19,11 +19,12 @@ class WordListDirector:
     def applyEntry(self, entry:Entry):
         self.entryListStatistics.addEntry(entry)
         for manager in self.managerList:
-            manager.applyEntry(entry)
+            manager.applyEntry(entry, self.entryListStatistics)
 
     def printReport(self):
         for manager in self.managerList:
             manager.printReport()
+        print(f'\n \t **Required letter counts (\\* - exact count)** \n\t\t{self.entryListStatistics.reportString()}\n')
 
     def reportString(self) -> str:
         report = ''

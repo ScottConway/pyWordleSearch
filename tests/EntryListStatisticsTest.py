@@ -13,6 +13,8 @@ class EntryListStatisticsTest(unittest.TestCase):
     def test_initialState(self):
         self.assertEqual(0, len(self.stats.gameWordListStats))
         self.assertEqual(0, self.stats.totalMatchedCount())
+        self.assertTrue(self.stats.doesWordMatchCounts('foggy'))
+        self.assertTrue(self.stats.doesWordMatchCounts('abcde'))
 
     def test_addEntryStatisticsAndClear(self):
         entry = Entry("foggy", "yxxxg")
@@ -27,6 +29,24 @@ class EntryListStatisticsTest(unittest.TestCase):
         self.stats.clear()
         self.assertEqual(0, len(self.stats.gameWordListStats))
         self.assertEqual(0, self.stats.totalMatchedCount())
+
+    def test_doesWordMatchCounts(self):
+        entry = Entry("foggy", "yxxxg")
+        self.stats.addEntry(entry)
+
+        wordLetters = self.stats.gameWordListStats
+        self.assertEqual(2, len(wordLetters))
+        self.assertEqual(2, self.stats.totalMatchedCount())
+        self.assertTrue('f' in wordLetters)
+        self.assertTrue('y' in wordLetters)
+        self.assertTrue(self.stats.doesWordMatchCounts('foggy'))
+        self.assertFalse(self.stats.doesWordMatchCounts('abcde'))
+
+        self.stats.clear()
+        self.assertEqual(0, len(self.stats.gameWordListStats))
+        self.assertEqual(0, self.stats.totalMatchedCount())
+        self.assertTrue(self.stats.doesWordMatchCounts('foggy'))
+        self.assertTrue(self.stats.doesWordMatchCounts('abcde'))
 
     def test_addMultipleEntries(self):
         #for this test the main word is misty

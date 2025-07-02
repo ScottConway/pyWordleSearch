@@ -1,6 +1,7 @@
 import copy
 
 from code.Entry import Entry
+from code.EntryListStatistics import EntryListStatistics
 from code.RegxWordFilter import RegxWordFilter
 from code.WordChecker import WordChecker
 from code.WordWeigher import WordWeigher
@@ -8,10 +9,11 @@ from code.WordWeigher import WordWeigher
 
 class WordList:
 
-    def __init__(self, data):
+    def __init__(self, data, useLetterCounts: bool = False):
         self.wordList = list()
         self.wordFilter = None
         self.wordWeigher = None
+        self.useLetterCounts = useLetterCounts
         if isinstance(data, list):
             for line in data:
                 word = line.strip('\n')
@@ -47,11 +49,13 @@ class WordList:
         else:
             raise Exception('WordWeigher already assigned to WordList')
 
-    def filterList(self, entry: Entry):
+    def filterList(self, entry: Entry, entryListStatistics: EntryListStatistics = None):
         if self.wordFilter is None:
             raise Exception('WordFilter has not been assigned to WordList')
         self.wordFilter.updatefilterPattern(entry)
         self.wordList = [word for word in self.wordList if self.wordFilter.wordMatchesPattern(word)]
+        if self.useLetterCounts and entryListStatistics is not None:
+            self.wordList = [word for word in self.wordList if entryListStatistics.doesWordMatchCounts(word)]
 
     def sortWords(self):
         if self.wordWeigher is not None:

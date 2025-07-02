@@ -16,10 +16,7 @@ class EntryListStatisticsTest(unittest.TestCase):
 
     def test_addEntryStatisticsAndClear(self):
         entry = Entry("foggy", "yxxxg")
-        entryStats = EntryStatistics()
-        entryStats.buildLetterStatistics(entry)
-
-        self.stats.addEntryStatistics(entryStats)
+        self.stats.addEntry(entry)
 
         wordLetters = self.stats.gameWordListStats
         self.assertEqual(2, len(wordLetters))
@@ -90,10 +87,7 @@ class EntryListStatisticsTest(unittest.TestCase):
     def test_multiLetterEntries(self):
         #for this test the main word is brass
         entry = Entry("darts", "xyyxg")
-        entryStats = EntryStatistics()
-        entryStats.buildLetterStatistics(entry)
-
-        self.stats.addEntryStatistics(entryStats)
+        self.stats.addEntry(entry)
         self.assertEqual(3, self.stats.totalMatchedCount())
 
         wordLetters = self.stats.gameWordListStats
@@ -115,10 +109,7 @@ class EntryListStatisticsTest(unittest.TestCase):
         self.assertEqual(1, letterStats.count)
 
         entry = Entry("swiss", "xxxgg")
-        entryStats = EntryStatistics()
-        entryStats.buildLetterStatistics(entry)
-
-        self.stats.addEntryStatistics(entryStats)
+        self.stats.addEntry(entry)
         self.assertEqual(4, self.stats.totalMatchedCount())
 
         wordLetters = self.stats.gameWordListStats

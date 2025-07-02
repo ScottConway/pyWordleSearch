@@ -22,3 +22,8 @@ class EntryListStatistics:
 
         return totalMatchedCount
 
+    def addEntry(self, entry):
+        entryStatistics = EntryStatistics()
+        entryStatistics.buildLetterStatistics(entry)
+        self.addEntryStatistics(entryStatistics)
+

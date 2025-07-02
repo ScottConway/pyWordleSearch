@@ -1,4 +1,6 @@
 from code.Entry import Entry
+from code.EntryListStatistics import EntryListStatistics
+from code.EntryStatistics import EntryStatistics
 from code.WordList import WordList
 from code.WordleListManager import WordleListManager
 
@@ -12,8 +14,10 @@ class WordListDirector:
         self.managerList.append(WordleListManager(self.commonList, '### Common Five Letter Words'))
         self.managerList.append(WordleListManager(self.wordleList, '### Wordle Words'))
         self.managerList.append(WordleListManager(self.fullList, '### Full List Five Letter Words'))
+        self.entryListStatistics = EntryListStatistics()
 
     def applyEntry(self, entry:Entry):
+        self.entryListStatistics.addEntry(entry)
         for manager in self.managerList:
             manager.applyEntry(entry)
 

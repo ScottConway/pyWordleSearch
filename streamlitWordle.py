@@ -14,7 +14,7 @@ def main():
     ENTRY_PATTERN = "[a-z]{5}-[xyg]{5}"
     parser = argparse.ArgumentParser(
         description='Helper program for wordle game.')
-    parser.add_argument('--version', action='version', version='%(prog)s 3.1.0')
+    parser.add_argument('--version', action='version', version='%(prog)s 3.2.0')
 
     if "director" not in st.session_state:
         st.session_state["director"] = WordListDirector()

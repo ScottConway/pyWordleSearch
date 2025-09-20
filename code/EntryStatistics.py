@@ -3,15 +3,23 @@ from code.LetterStatistics import LetterStatistics
 
 
 class EntryStatistics:
+    """
+    This class maintains the statistics of a single entry
+    """
     def __init__(self):
         self.wordLetters = {}
 
     def buildLetterStatistics(self, entry: Entry):
+        """
+        Builds the statistics of a single entry
+        :param entry:
+        """
+        # Determine the smallest between the entry word and entry pattern (both should be 5)
         numLetters = min(len(entry.word), len(entry.pattern))
         for i in range(numLetters):
             wordLetter: str = entry.word[i]
-            exactMatch = False
-            letterMissing = False
+            exactMatch = False  # if the letter is matched in the correct position
+            letterMissing = False # true if the letter is not found
             if wordLetter in self.wordLetters:
                 continue
 

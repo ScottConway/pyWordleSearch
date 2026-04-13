@@ -3,7 +3,6 @@ python script to help me out in wordle.
 
 **Table of Contents**
 
-- [Original pyWordleSearch - version 2.x](OriginalPWS.md)  
 - [OO Rewrite of pyWordleSearch - version 3.x](OORewrite.md)
 - [Streamlit UI for OO Rewrite](StreamlitPWS.md)
 
@@ -18,6 +17,12 @@ python script to help me out in wordle.
 - [x] Add a must-have characters map to supplement the set that counts and ensures the correct number of letters for faster filtering
 - [x] Better double letter logic for the above - see [this reddit post](https://www.reddit.com/r/wordle/comments/rypous/do_wordles_have_double_letters/).
 - [x] Add a streamlit UI 
+
+## Changes in version 3.2.1
+
+- Simple refactoring.  Removed the original code.  I had kept it originally because I wanted
+a reference but it was also throwing flags when I asked Cursor or Gemini to refactor the OO code 
+even when I asked it to ignore the original code.  
 
 ## Changes in version 3.2.0
 

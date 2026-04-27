@@ -36,10 +36,7 @@ class EntryList:
         """
         self.entries = []
         self.entryDictionary = {}
-        self.mustHaveLetters = set()
-        self.gLetters = set()
-        self.yLetters = set()
-        self.triedLetters = set()
+        EntryList.clear()
 
     def updateMustHaveLetters(self, entry: Entry):
         """
@@ -49,13 +46,13 @@ class EntryList:
         for i in range(MaxWordSize):
             wordLetter = entry.word[i]
             patternLetter = entry.pattern[i]
-            self.triedLetters.add(wordLetter)
+            EntryList.triedLetters.add(wordLetter)
             if patternLetter == Y or patternLetter == G:
-                self.mustHaveLetters.add(wordLetter)
+                EntryList.mustHaveLetters.add(wordLetter)
                 if patternLetter == G:
-                    self.gLetters.add(wordLetter)
+                    EntryList.gLetters.add(wordLetter)
                 else:
-                    self.yLetters.add(wordLetter)
+                    EntryList.yLetters.add(wordLetter)
 
     def add(self, entry: Entry):
         """

@@ -22,4 +22,12 @@ class UntriedLetterWordFilter(RegxWordFilter):
         return "UntriedLetterWordFilter"
 
     def wordMatchesPattern(self, word):
+        """
+        Overrides RegxWordFilter to remove the mustHaveLetters checked because we want to focus on
+        letters that have not been tried.   I didn't do a !hasRequiredCharacters because I don't want to
+        focus entirely of untriedLetters if none exists - we just weigh it such that untriedLetters have a
+        much higher weight than matched letters.
+        :param word:
+        :return: if the word matches the pattern. 
+        """
         return re.match(self.buildPattern(self.filterPattern), word)

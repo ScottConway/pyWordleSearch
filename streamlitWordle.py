@@ -85,7 +85,7 @@ def main():
 
                 else:
                     if errorMessage == 'Word already used.':
-                        st.write(WordleDisplayHelper.wordAleadyUsedMessage(entry, code.EntryList.entryListInstance))
+                        st.write(WordleDisplayHelper.wordAlreadyUsedMessage(entry, code.EntryList.entryListInstance))
                     elif errorMessage == 'Too many must have letters.':
                         st.write(WordleDisplayHelper.tooManyMustHaveLettersMessage())
                     else:

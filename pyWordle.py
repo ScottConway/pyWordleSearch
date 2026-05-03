@@ -45,7 +45,7 @@ def main():
         elif testWord.lower() == 'quit' or testWord.lower() == 'exit':
             finished = True
             continue
-        elif len(testWord) > 5 and testWord[5] == '-':
+        elif len(testWord) == 11 and testWord[5] == '-':
             result = testWord[-5:]
             testWord = testWord[0:5]
             splitWord = True

@@ -29,7 +29,7 @@ class WordleDisplayHelper:
         return helpString
 
     @staticmethod
-    def printWordAlreadyUsed(entry:Entry, entryList:EntryList):
+    def printWordAlreadyUsed(entry: Entry, entryList: EntryList):
         print()
         print(f'{entry.word} is already used')
         print()
@@ -38,19 +38,19 @@ class WordleDisplayHelper:
         input("Press enter to continue")
 
     @staticmethod
-    def wordAleadyUsedMessage(entry:Entry, entryList:EntryList) -> str:
+    def wordAlreadyUsedMessage(entry: Entry, entryList: EntryList) -> str:
         returnString = f'{entry.word} is already used\n\n'
         return returnString
 
     @staticmethod
-    def printEntryList(entryList:EntryList):
+    def printEntryList(entryList: EntryList):
         print("Past Entries:")
         for i in range(len(entryList.entries)):
             entry = entryList.entries[i]
             print(f'{i}: {entry.word}  -  {entry.pattern}')
 
     @staticmethod
-    def printUnhandledError(errorMessage:str, entry:Entry, entryList:EntryList):
+    def printUnhandledError(errorMessage: str, entry: Entry, entryList: EntryList):
         print()
         print(f'The entry {entry.word} failed with the following error: {errorMessage}')
         WordleDisplayHelper.printEntryList(entryList)
@@ -58,7 +58,7 @@ class WordleDisplayHelper:
         input("Press enter to continue")
 
     @staticmethod
-    def unhandledErrorMessage(errorMessage:str, entry:Entry) -> str:
+    def unhandledErrorMessage(errorMessage: str, entry: Entry) -> str:
         returnString = f'The entry {entry.word} failed with the following error: {errorMessage}\n\n'
         return returnString
 

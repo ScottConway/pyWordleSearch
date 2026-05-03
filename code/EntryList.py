@@ -2,6 +2,7 @@ from code.Entry import *
 
 entryListInstance = None
 
+
 class EntryList:
     """
     Maintains a list of Entry instances and performs work across them.
@@ -14,14 +15,14 @@ class EntryList:
         entries : the list of Entry instances for processing.
         entryDictionary : a dictionary mapping Entry words to Entry instances for quick instances.
     """
-    mustHaveLetters = set()
-    gLetters = set()
-    yLetters = set()
-    triedLetters = set()
 
     def __init__(self):
         self.entries = []
         self.entryDictionary = {}
+        self.mustHaveLetters = set()
+        self.gLetters = set()
+        self.yLetters = set()
+        self.triedLetters = set()
 
     def hasEntries(self) -> bool:
         """
@@ -36,7 +37,7 @@ class EntryList:
         """
         self.entries = []
         self.entryDictionary = {}
-        EntryList.clear()
+        self.clear()
 
     def updateMustHaveLetters(self, entry: Entry):
         """
@@ -46,13 +47,13 @@ class EntryList:
         for i in range(MaxWordSize):
             wordLetter = entry.word[i]
             patternLetter = entry.pattern[i]
-            EntryList.triedLetters.add(wordLetter)
+            self.triedLetters.add(wordLetter)
             if patternLetter == Y or patternLetter == G:
-                EntryList.mustHaveLetters.add(wordLetter)
+                self.mustHaveLetters.add(wordLetter)
                 if patternLetter == G:
-                    EntryList.gLetters.add(wordLetter)
+                    self.gLetters.add(wordLetter)
                 else:
-                    EntryList.yLetters.add(wordLetter)
+                    self.yLetters.add(wordLetter)
 
     def add(self, entry: Entry):
         """
@@ -64,29 +65,26 @@ class EntryList:
 
         self.updateMustHaveLetters(entry)
         if len(self.mustHaveLetters) > MaxWordSize:
-            raise Exception('Typo in word or pattern as you have identified matches in more than five letters across all entries!')
+            raise Exception(
+                'Typo in word or pattern as you have identified matches in more than five letters across all entries!')
 
         self.entries.append(entry)
         self.entryDictionary[entry.word] = entry
 
-    @staticmethod
-    def mustHaveLetterSet():
-        return EntryList.mustHaveLetters.copy()
+    def mustHaveLetterSet(self):
+        return self.mustHaveLetters.copy()
 
-    @staticmethod
-    def yLetterSet():
-        return EntryList.yLetters.copy()
+    def yLetterSet(self):
+        return self.yLetters.copy()
 
-    @staticmethod
-    def triedLetterSet():
-        return EntryList.triedLetters.copy()
+    def triedLetterSet(self):
+        return self.triedLetters.copy()
 
-    @classmethod
-    def clear(cls):
-        EntryList.mustHaveLetters.clear()
-        EntryList.yLetters.clear()
-        EntryList.triedLetters.clear()
-        EntryList.gLetters.clear()
+    def clear(self):
+        self.mustHaveLetters.clear()
+        self.yLetters.clear()
+        self.triedLetters.clear()
+        self.gLetters.clear()
 
     def validateEntry(self, entry: Entry) -> tuple[bool, str]:
         if entry.word in self.entryDictionary:

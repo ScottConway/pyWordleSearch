@@ -1,3 +1,4 @@
+import code
 import unittest
 
 from code.Entry import Entry
@@ -10,8 +11,8 @@ class EntryListTest(unittest.TestCase):
         self.entry1 = Entry('aword', 'yxyyg')
         self.entry2 = Entry('bword', 'gxyyg')
 
-    def tearDown(self):
-        EntryList.clear()
+    # def tearDown(self):
+    #     code.EntryList.entryListInstance.clear()
 
     def test_something(self):
         entryList = EntryList()
@@ -22,10 +23,10 @@ class EntryListTest(unittest.TestCase):
     def test_mustHaveLetters(self):
         entryList = EntryList()
         entryList.add(self.entry1)
-        letterSet = EntryList.mustHaveLetterSet()
+        letterSet = entryList.mustHaveLetterSet()
         self.assertEqual(4, len(letterSet))
         entryList.add(self.entry2)
-        letterSet = EntryList.mustHaveLetterSet()
+        letterSet = entryList.mustHaveLetterSet()
         self.assertEqual(5, len(letterSet))
 
     def test_valueErrorIfSameWord(self):
@@ -57,13 +58,15 @@ class EntryListTest(unittest.TestCase):
         nextFiveLetters = Entry('fghij', 'yyyyy')
         entryList = EntryList()
         entryList.add(firstFiveLetters)
-        letterSet = EntryList.mustHaveLetterSet()
+        letterSet = entryList.mustHaveLetterSet()
         self.assertEqual(5, len(letterSet))
         with self.assertRaises(Exception) as context:
             entryList.add(nextFiveLetters)
 
-        self.assertTrue('Typo in word or pattern as you have identified matches in more than five letters!' in str(
-            context.exception))
+        print(context.exception)
+
+        self.assertTrue('Typo in word or pattern as you have identified matches in more than five letters across all '
+                        'entries!' in str(context.exception))
 
 
 if __name__ == '__main__':

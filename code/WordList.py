@@ -23,15 +23,14 @@ class WordList:
                 else:
                     print(f'{word} is invalid as all words must be five alphabetic letter.  Ignored from {data}')
         elif isinstance(data, str):
-            file = open(data, "r")
-
-            for line in file:
-                word = line.strip('\n')
-                goodWord, checkedWord, error = WordChecker.validate(word)
-                if goodWord:
-                    self.wordList.append(checkedWord)
-                else:
-                    print(f'{word} is invalid as all words must be five alphabetic letter.  Ignored from {data}')
+            with open(data, "r") as file:
+                for line in file:
+                    word = line.strip('\n')
+                    goodWord, checkedWord, error = WordChecker.validate(word)
+                    if goodWord:
+                        self.wordList.append(checkedWord)
+                    else:
+                        print(f'{word} is invalid as all words must be five alphabetic letter.  Ignored from {data}')
         elif isinstance(data, WordList):
             self.wordList = copy.deepcopy(data.wordList)
         else:

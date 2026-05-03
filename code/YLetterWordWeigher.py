@@ -1,3 +1,5 @@
+import code
+
 from code.EntryList import EntryList
 from code.WordWeigher import WordWeigher
 
@@ -9,7 +11,7 @@ class YLetterWordWeigher(WordWeigher):
                   WordWeigher.thirdLetterWeight[word[2]] + \
                   WordWeigher.fourthLetterWeight[word[3]] + WordWeigher.fifthLetterWeight[word[4]]
         uniqueLetters = set()
-        yLetters = EntryList.yLetterSet()
+        yLetters = code.EntryList.entryListInstance.yLetterSet()
         matchedYLetters = 0
 
         for letter in word:

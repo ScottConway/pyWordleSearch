@@ -2,6 +2,8 @@ import argparse
 import code.EntryList
 
 from code.Entry import Entry
+from code.PatternChecker import PatternChecker
+from code.WordChecker import WordChecker
 from code.WordListDirector import WordListDirector
 from code.WordleDisplayHelper import WordleDisplayHelper
 from code.EntryList import EntryList
@@ -49,6 +51,15 @@ def main():
             result = testWord[-5:]
             testWord = testWord[0:5]
             splitWord = True
+            isWordGood, checkedWord, errorMessage = WordChecker.validate(testWord)
+            if not isWordGood:
+                print(errorMessage)
+                continue
+            isPatternGood, checkedPattern, errorMessage = PatternChecker.validate(result)
+            if not isPatternGood:
+                print(errorMessage)
+                continue
+
 
         if not splitWord:
             result = input(

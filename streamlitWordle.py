@@ -4,8 +4,11 @@ import streamlit as st
 import re
 
 import code.EntryList
+
 from code.Entry import Entry
 from code.EntryList import EntryList
+from code.PatternChecker import PatternChecker
+from code.WordChecker import WordChecker
 from code.WordListDirector import WordListDirector
 from code.WordleDisplayHelper import WordleDisplayHelper
 
@@ -68,6 +71,15 @@ def main():
             else:
                 result = testWord[-5:]
                 testWord = testWord[0:5]
+
+                isWordGood, checkedWord, errorMessage = WordChecker.validate(testWord)
+                if not isWordGood:
+                    st.write(errorMessage)
+
+                isPatternGood, checkedPattern, errorMessage = PatternChecker.validate(result)
+                if not isPatternGood:
+                    st.write(errorMessage)
+
                 entry = Entry(testWord, result)
 
                 isValid, errorMessage = code.EntryList.entryListInstance.validateEntry(entry)
